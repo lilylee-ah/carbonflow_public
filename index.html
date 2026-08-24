@@ -4,16 +4,129 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="CarbonFlow — Carbon Project Operations & Revenue Management MVP" />
-  <title>CarbonFlow · V1.2</title>
+  <title>CarbonFlow · V1.3</title>
   <style>
 :root{
   --bg:#f4f7f6;--surface:#fff;--surface-2:#f8faf9;--ink:#182321;--muted:#66736f;--line:#dce4e1;
   --primary:#1f6b53;--primary-2:#e8f3ef;--danger:#a73f3f;--warn:#9a6c14;--shadow:0 8px 30px rgba(21,43,36,.07);
-}
-*{box-sizing:border-box}html{font-family:Arial,Helvetica,system-ui,sans-serif;background:var(--bg);color:var(--ink)}body{margin:0;min-height:100vh}button,input,select,textarea{font:inherit}.app-shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:#142a24;color:#eff7f4;padding:26px 20px;display:flex;flex-direction:column}.brand-wrap{display:flex;gap:12px;align-items:center;margin-bottom:34px}.brand-mark{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#d7eee5;color:#163c30;font-weight:800;font-size:14px}.brand{font-weight:700;letter-spacing:-.02em}.brand-sub{font-size:11px;opacity:.6;margin-top:3px}.nav{display:flex;flex-direction:column;gap:6px}.nav-item{border:0;background:transparent;color:#c9d7d2;text-align:left;padding:11px 12px;border-radius:8px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:14px}.nav-item:hover,.nav-item.active{background:rgba(255,255,255,.09);color:#fff}.sidebar-foot{margin-top:auto;font-size:12px;color:#9eb0aa}.sidebar-foot p{line-height:1.5}.status-dot-row{color:#d8e6e1;display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.dot.green{background:#62d69c}.main{padding:0 34px 50px;min-width:0}.topbar{height:104px;display:flex;align-items:center;justify-content:space-between;gap:20px}.topbar h1{margin:0;font-size:25px;letter-spacing:-.04em}.topbar p{margin:6px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;gap:10px}.btn{border-radius:8px;border:1px solid transparent;padding:10px 14px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s}.btn.primary{background:var(--primary);color:#fff}.btn.primary:hover{filter:brightness(.94)}.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}.btn.danger{background:#fff;border-color:#edcaca;color:var(--danger)}.btn.danger.push-left{margin-right:auto}.btn.danger:hover{background:#fff5f5;border-color:#dcaeae}.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:21px}.link-btn{border:0;background:transparent;color:var(--primary);font-weight:600;font-size:12px;cursor:pointer;padding:4px}.view{display:none}.view.active{display:block}.notice{background:#edf5f1;border:1px solid #d8e9e1;border-radius:10px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:18px;color:#395c50}.notice strong{color:#184f3e;margin-right:8px}.kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 2px 12px rgba(21,43,36,.025)}.kpi .label{font-size:11px;color:var(--muted);margin-bottom:9px}.kpi .value{font-size:21px;font-weight:700;letter-spacing:-.04em}.kpi .sub{font-size:10px;color:var(--muted);margin-top:7px}.grid-2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);gap:16px;margin-bottom:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 16px rgba(30,55,46,.03);overflow:hidden;margin-bottom:16px}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 20px 13px}.card-head h2{font-size:15px;margin:0;letter-spacing:-.02em}.card-head p{font-size:11px;color:var(--muted);margin:5px 0 0}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#74807c;font-weight:600;background:#fbfcfc;text-align:left;padding:11px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap}td{padding:12px 14px;border-bottom:1px solid #edf1ef;vertical-align:middle}tbody tr:last-child td{border-bottom:0}tbody tr.clickable{cursor:pointer}tbody tr.clickable:hover{background:#fafcfb}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:600;background:#eef2f1;color:#50605b;white-space:nowrap}.badge.green{background:#e8f4ef;color:#236b54}.badge.blue{background:#e9f0f8;color:#345f87}.badge.amber{background:#f8f1df;color:#8c6717}.badge.red{background:#f8e8e8;color:#9c4040}.muted{color:var(--muted)}.project-title{font-weight:600}.project-meta{font-size:10px;color:var(--muted);margin-top:3px}.attention-list{padding:0 18px 14px}.attention-item{display:grid;grid-template-columns:9px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-top:1px solid #edf1ef}.attention-item:first-child{border-top:1px solid var(--line)}.attention-dot{width:8px;height:8px;border-radius:50%;background:#d69d2b;margin-top:4px}.attention-dot.ok{background:#70a591}.attention-item h4{font-size:12px;margin:0 0 3px}.attention-item p{font-size:10px;line-height:1.5;color:var(--muted);margin:0}.attention-item .days{font-size:10px;color:var(--warn);font-weight:600}.section-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-bottom:14px}.searchbox{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 11px;min-width:min(520px,65vw)}.searchbox input{border:0;outline:0;width:100%;padding:10px 0;background:transparent;font-size:12px}.projects-layout{display:grid;grid-template-columns:minmax(520px,1fr) minmax(380px,.8fr);gap:16px;align-items:start}.project-list-card{margin:0}.detail-card{margin:0;min-height:540px;position:sticky;top:118px}.empty-state{display:grid;place-items:center;text-align:center;padding:105px 30px;color:var(--muted)}.empty-icon{width:48px;height:48px;border-radius:13px;background:var(--primary-2);color:var(--primary);display:grid;place-items:center;font-size:20px;margin-bottom:14px}.empty-state h3{margin:0 0 6px;color:var(--ink);font-size:14px}.empty-state p{font-size:11px;max-width:280px;line-height:1.6}.detail-inner{padding:20px}.detail-top{display:flex;justify-content:space-between;gap:12px}.detail-top h2{font-size:18px;margin:4px 0 5px}.eyebrow{text-transform:uppercase;font-size:9px;letter-spacing:.12em;font-weight:700;color:var(--muted)}.meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:16px 0}.meta-cell{background:#fff;padding:12px}.meta-cell .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.meta-cell .v{font-size:12px;font-weight:600;margin-top:5px}.action-card{border:1px solid #d8e8e1;background:#f6fbf9;border-radius:10px;padding:14px;margin:14px 0}.action-card h3{font-size:13px;margin:0 0 10px}.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action-item .k{font-size:9px;color:var(--muted);text-transform:uppercase}.action-item .v{font-size:11px;margin-top:4px;line-height:1.45}.workflow-title{font-size:12px;font-weight:700;margin:18px 0 10px}.workflow-list{display:flex;flex-direction:column}.workflow-step{display:grid;grid-template-columns:20px 1fr;gap:10px;position:relative;padding-bottom:12px}.workflow-step:not(:last-child)::before{content:"";position:absolute;left:7px;top:16px;bottom:0;width:1px;background:var(--line)}.step-dot{width:15px;height:15px;border-radius:50%;border:2px solid #c8d3cf;background:#fff;z-index:1}.workflow-step.done .step-dot{background:var(--primary);border-color:var(--primary)}.workflow-step.current .step-dot{border-color:var(--primary);box-shadow:0 0 0 4px #e8f4ef}.workflow-step .name{font-size:11px;font-weight:600}.workflow-step .desc{font-size:9px;color:var(--muted);margin-top:2px}.inventory-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.mini-stat{background:var(--surface-2);border:1px solid #e7ecea;border-radius:8px;padding:10px}.mini-stat .k{font-size:9px;color:var(--muted)}.mini-stat .v{font-size:13px;font-weight:700;margin-top:4px}.sales-layout{display:grid;grid-template-columns:minmax(620px,1.35fr) minmax(310px,.65fr);gap:16px;align-items:start}.calculator-card{margin:0}.result-card{position:sticky;top:118px;padding:20px;margin:0}.result-card h2{margin:5px 0 18px;font-size:16px}.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 20px 20px}.form-grid.two-col{grid-template-columns:repeat(2,1fr);padding:0}.form-grid label{display:flex;flex-direction:column;gap:6px;font-size:10px;color:var(--muted);font-weight:600}.form-grid input,.form-grid select,.form-grid textarea{border:1px solid var(--line);border-radius:7px;padding:9px 10px;color:var(--ink);outline:0;background:#fff;font-size:12px}.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:#7aa997;box-shadow:0 0 0 3px #edf6f2}.form-grid .full{grid-column:1/-1}.form-divider{grid-column:1/-1;border-top:1px solid var(--line);margin-top:4px;padding-top:10px}.form-divider span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}.form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;padding-top:4px}.inline-warning{grid-column:1/-1;background:#fff4e4;color:#8a641b;border:1px solid #f1d8aa;border-radius:7px;padding:9px 10px;font-size:11px}.hidden{display:none!important}.preview-stack{display:flex;flex-direction:column;gap:9px}.preview-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1ef;font-size:11px}.preview-line strong{font-size:12px}.preview-line.total{border-top:1px solid var(--line);border-bottom:0;margin-top:4px;padding-top:13px}.preview-line.total strong{font-size:15px}.preview-bar{height:8px;border-radius:99px;background:#e9eeec;overflow:hidden;display:flex;margin:12px 0 4px}.preview-bar span:nth-child(1){background:#2f755e}.preview-bar span:nth-child(2){background:#6ca08e}.preview-bar span:nth-child(3){background:#b4c8c1}.settings-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.workflow-setting{display:grid;grid-template-columns:1fr 90px;gap:10px;align-items:center;padding:11px 20px;border-top:1px solid #edf1ef}.workflow-setting span{font-size:11px}.workflow-setting input{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px;font-size:11px}.stack-actions{display:flex;gap:8px;padding:4px 20px 18px}.info-box{margin:0 20px 20px;background:var(--surface-2);border:1px solid var(--line);padding:13px;border-radius:8px}.info-box strong{font-size:11px}.info-box p{font-size:10px;line-height:1.6;color:var(--muted)}.modal{position:fixed;inset:0;display:none;z-index:50}.modal.open{display:grid;place-items:center}.modal-backdrop{position:absolute;inset:0;background:rgba(12,25,21,.45);backdrop-filter:blur(2px)}.modal-panel{position:relative;width:min(820px,calc(100vw - 32px));max-height:90vh;overflow:auto;background:#fff;border-radius:13px;box-shadow:var(--shadow);padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.modal-head h2{font-size:18px;margin:4px 0 0}.money{font-variant-numeric:tabular-nums}.right{text-align:right}.small{font-size:10px}.delete-btn{border:0;background:transparent;color:#a05252;cursor:pointer;font-size:11px}.empty-row{text-align:center;color:var(--muted);padding:28px 14px}
+}*{box-sizing:border-box}html{font-family:Arial,Helvetica,system-ui,sans-serif;background:var(--bg);color:var(--ink)}body{margin:0;min-height:100vh}button,input,select,textarea{font:inherit}
+.app-shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:#142a24;color:#eff7f4;padding:26px 20px;display:flex;flex-direction:column}
+.brand-wrap{display:flex;gap:12px;align-items:center;margin-bottom:34px}
+.brand-mark{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#d7eee5;color:#163c30;font-weight:800;font-size:14px}
+.brand{font-weight:700;letter-spacing:-.02em}.brand-sub{font-size:11px;opacity:.6;margin-top:3px}
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav-item{border:0;background:transparent;color:#c9d7d2;text-align:left;padding:11px 12px;border-radius:8px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:14px}
+.nav-item:hover,.nav-item.active{background:rgba(255,255,255,.09);color:#fff}
+.sidebar-foot{margin-top:auto;font-size:12px;color:#9eb0aa}.sidebar-foot p{line-height:1.5}
+.status-dot-row{color:#d8e6e1;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.dot.green{background:#62d69c}
+.main{padding:0 34px 50px;min-width:0}
+.topbar{height:104px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.topbar h1{margin:0;font-size:25px;letter-spacing:-.04em}.topbar p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.top-actions{display:flex;gap:10px}
+.btn{border-radius:8px;border:1px solid transparent;padding:10px 14px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s}
+.btn.primary{background:var(--primary);color:#fff}.btn.primary:hover{filter:brightness(.94)}
+.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn.danger{background:#fff;border-color:#edcaca;color:var(--danger)}.btn.danger.push-left{margin-right:auto}
+.btn.danger:hover{background:#fff5f5;border-color:#dcaeae}
+.btn.warning{background:#fff8ec;border-color:#f0d08a;color:#8a641b}.btn.warning:hover{background:#fff3d4}
+.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:21px}
+.link-btn{border:0;background:transparent;color:var(--primary);font-weight:600;font-size:12px;cursor:pointer;padding:4px}
+.view{display:none}.view.active{display:block}
+.notice{background:#edf5f1;border:1px solid #d8e9e1;border-radius:10px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:18px;color:#395c50}
+.notice strong{color:#184f3e;margin-right:8px}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 2px 12px rgba(21,43,36,.025)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:9px}.kpi .value{font-size:21px;font-weight:700;letter-spacing:-.04em}.kpi .sub{font-size:10px;color:var(--muted);margin-top:7px}
+.grid-2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);gap:16px;margin-bottom:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 16px rgba(30,55,46,.03);overflow:hidden;margin-bottom:16px}
+.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 20px 13px}
+.card-head h2{font-size:15px;margin:0;letter-spacing:-.02em}.card-head p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#74807c;font-weight:600;background:#fbfcfc;text-align:left;padding:11px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid #edf1ef;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}tbody tr.clickable{cursor:pointer}tbody tr.clickable:hover{background:#fafcfb}
+.badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:600;background:#eef2f1;color:#50605b;white-space:nowrap}
+.badge.green{background:#e8f4ef;color:#236b54}.badge.blue{background:#e9f0f8;color:#345f87}
+.badge.amber{background:#f8f1df;color:#8c6717}.badge.red{background:#f8e8e8;color:#9c4040}
+.muted{color:var(--muted)}.project-title{font-weight:600}.project-meta{font-size:10px;color:var(--muted);margin-top:3px}
+.attention-list{padding:0 18px 14px}
+.attention-item{display:grid;grid-template-columns:9px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-top:1px solid #edf1ef}
+.attention-item:first-child{border-top:1px solid var(--line)}
+.attention-dot{width:8px;height:8px;border-radius:50%;background:#d69d2b;margin-top:4px}.attention-dot.ok{background:#70a591}
+.attention-item h4{font-size:12px;margin:0 0 3px}.attention-item p{font-size:10px;line-height:1.5;color:var(--muted);margin:0}
+.attention-item .days{font-size:10px;color:var(--warn);font-weight:600}
+.section-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-bottom:14px}
+.searchbox{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 11px;min-width:min(520px,65vw)}
+.searchbox input{border:0;outline:0;width:100%;padding:10px 0;background:transparent;font-size:12px}
+.projects-layout{display:grid;grid-template-columns:minmax(520px,1fr) minmax(380px,.8fr);gap:16px;align-items:start}
+.project-list-card{margin:0}.detail-card{margin:0;min-height:540px;position:sticky;top:118px}
+.empty-state{display:grid;place-items:center;text-align:center;padding:105px 30px;color:var(--muted)}
+.empty-icon{width:48px;height:48px;border-radius:13px;background:var(--primary-2);color:var(--primary);display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+.empty-state h3{margin:0 0 6px;color:var(--ink);font-size:14px}.empty-state p{font-size:11px;max-width:280px;line-height:1.6}
+.detail-inner{padding:20px}.detail-top{display:flex;justify-content:space-between;gap:12px}
+.detail-top h2{font-size:18px;margin:4px 0 5px}
+.eyebrow{text-transform:uppercase;font-size:9px;letter-spacing:.12em;font-weight:700;color:var(--muted)}
+.meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:16px 0}
+.meta-cell{background:#fff;padding:12px}.meta-cell .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.meta-cell .v{font-size:12px;font-weight:600;margin-top:5px}
+.action-card{border:1px solid #d8e8e1;background:#f6fbf9;border-radius:10px;padding:14px;margin:14px 0}
+.action-card h3{font-size:13px;margin:0 0 10px}.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.action-item .k{font-size:9px;color:var(--muted);text-transform:uppercase}.action-item .v{font-size:11px;margin-top:4px;line-height:1.45}
+.workflow-title{font-size:12px;font-weight:700;margin:18px 0 10px}.workflow-list{display:flex;flex-direction:column}
+.workflow-step{display:grid;grid-template-columns:20px 1fr;gap:10px;position:relative;padding-bottom:12px}
+.workflow-step:not(:last-child)::before{content:"";position:absolute;left:7px;top:16px;bottom:0;width:1px;background:var(--line)}
+.step-dot{width:15px;height:15px;border-radius:50%;border:2px solid #c8d3cf;background:#fff;z-index:1}
+.workflow-step.done .step-dot{background:var(--primary);border-color:var(--primary)}
+.workflow-step.current .step-dot{border-color:var(--primary);box-shadow:0 0 0 4px #e8f4ef}
+.workflow-step .name{font-size:11px;font-weight:600}.workflow-step .desc{font-size:9px;color:var(--muted);margin-top:2px}
+.inventory-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.mini-stat{background:var(--surface-2);border:1px solid #e7ecea;border-radius:8px;padding:10px}
+.mini-stat .k{font-size:9px;color:var(--muted)}.mini-stat .v{font-size:13px;font-weight:700;margin-top:4px}
+.sales-layout{display:grid;grid-template-columns:minmax(620px,1.35fr) minmax(310px,.65fr);gap:16px;align-items:start}
+.calculator-card{margin:0}.result-card{position:sticky;top:118px;padding:20px;margin:0}
+.result-card h2{margin:5px 0 18px;font-size:16px}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 20px 20px}
+.form-grid.two-col{grid-template-columns:repeat(2,1fr);padding:0}
+.form-grid label{display:flex;flex-direction:column;gap:6px;font-size:10px;color:var(--muted);font-weight:600}
+.form-grid input,.form-grid select,.form-grid textarea{border:1px solid var(--line);border-radius:7px;padding:9px 10px;color:var(--ink);outline:0;background:#fff;font-size:12px}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:#7aa997;box-shadow:0 0 0 3px #edf6f2}
+.form-grid .full{grid-column:1/-1}
+.form-divider{grid-column:1/-1;border-top:1px solid var(--line);margin-top:4px;padding-top:10px}
+.form-divider span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;padding-top:4px}
+.inline-warning{grid-column:1/-1;background:#fff4e4;color:#8a641b;border:1px solid #f1d8aa;border-radius:7px;padding:9px 10px;font-size:11px}
+/* ── EDIT MODE BANNER ── */
+.edit-banner{grid-column:1/-1;background:#fff8e6;border:1px solid #f0d08a;border-radius:9px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.edit-banner-label{font-size:12px;font-weight:700;color:#7a560e;display:flex;align-items:center;gap:8px}
+.edit-banner-label span{font-size:18px}
+.hidden{display:none!important}
+.preview-stack{display:flex;flex-direction:column;gap:9px}
+.preview-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1ef;font-size:11px}
+.preview-line strong{font-size:12px}.preview-line.total{border-top:1px solid var(--line);border-bottom:0;margin-top:4px;padding-top:13px}
+.preview-line.total strong{font-size:15px}
+.preview-bar{height:8px;border-radius:99px;background:#e9eeec;overflow:hidden;display:flex;margin:12px 0 4px}
+.preview-bar span:nth-child(1){background:#2f755e}.preview-bar span:nth-child(2){background:#6ca08e}.preview-bar span:nth-child(3){background:#b4c8c1}
+.settings-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.workflow-setting{display:grid;grid-template-columns:1fr 90px;gap:10px;align-items:center;padding:11px 20px;border-top:1px solid #edf1ef}
+.workflow-setting span{font-size:11px}.workflow-setting input{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px;font-size:11px}
+.stack-actions{display:flex;gap:8px;padding:4px 20px 18px}
+.info-box{margin:0 20px 20px;background:var(--surface-2);border:1px solid var(--line);padding:13px;border-radius:8px}
+.info-box strong{font-size:11px}.info-box p{font-size:10px;line-height:1.6;color:var(--muted)}
+.modal{position:fixed;inset:0;display:none;z-index:50}.modal.open{display:grid;place-items:center}
+.modal-backdrop{position:absolute;inset:0;background:rgba(12,25,21,.45);backdrop-filter:blur(2px)}
+.modal-panel{position:relative;width:min(820px,calc(100vw - 32px));max-height:90vh;overflow:auto;background:#fff;border-radius:13px;box-shadow:var(--shadow);padding:20px}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.modal-head h2{font-size:18px;margin:4px 0 0}
+.money{font-variant-numeric:tabular-nums}.right{text-align:right}.small{font-size:10px}
+.action-btns{display:flex;gap:6px;align-items:center}
+.edit-btn{border:0;background:transparent;color:var(--primary);cursor:pointer;font-size:11px;font-weight:600;padding:2px 4px}
+.delete-btn{border:0;background:transparent;color:#a05252;cursor:pointer;font-size:11px}
+.empty-row{text-align:center;color:var(--muted);padding:28px 14px}
+/* highlight editing row */
+tr.editing-row td{background:#fffbec!important}
 @media(max-width:1180px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.projects-layout,.sales-layout{grid-template-columns:1fr}.detail-card,.result-card{position:static}.form-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:820px){.app-shell{grid-template-columns:1fr}.sidebar{position:static;height:auto;padding:15px}.brand-wrap{margin-bottom:12px}.nav{flex-direction:row;overflow:auto}.nav-item{white-space:nowrap}.sidebar-foot{display:none}.main{padding:0 16px 40px}.topbar{height:auto;padding:20px 0;align-items:flex-start}.top-actions{flex-wrap:wrap;justify-content:flex-end}.grid-2,.settings-grid{grid-template-columns:1fr}.projects-layout{grid-template-columns:1fr}.searchbox{min-width:0;flex:1}.kpi-grid{grid-template-columns:repeat(2,1fr)}.form-grid,.form-grid.two-col{grid-template-columns:1fr}.inventory-row{grid-template-columns:repeat(2,1fr)}}
-
   </style>
 </head>
 <body>
@@ -26,20 +139,17 @@
           <div class="brand-sub">Project & Revenue Ops</div>
         </div>
       </div>
-
       <nav class="nav" aria-label="Primary navigation">
         <button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
         <button class="nav-item" data-view="projects"><span>◫</span> Projects</button>
         <button class="nav-item" data-view="sales"><span>↗</span> Sales & Distribution</button>
         <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
       </nav>
-
       <div class="sidebar-foot">
         <div class="status-dot-row"><span class="dot green"></span> Local MVP</div>
         <p>Data is saved only in this browser.</p>
       </div>
     </aside>
-
     <main class="main">
       <header class="topbar">
         <div>
@@ -52,24 +162,17 @@
         </div>
       </header>
 
+      <!-- DASHBOARD -->
       <section id="view-dashboard" class="view active">
         <div class="notice">
-          <div>
-            <strong>V1.2 · FIXED</strong>
-            <span>Registry data is manual for now. Live Verra integration can be added later.</span>
-          </div>
+          <div><strong>V1.3 · Sales Edit</strong><span>Sales History now supports inline editing. Registry data is manual for now.</span></div>
           <button class="link-btn" data-view-jump="projects">Manage projects →</button>
         </div>
-
         <div class="kpi-grid" id="kpi-grid"></div>
-
         <div class="grid-2">
           <section class="card">
             <div class="card-head">
-              <div>
-                <h2>Project Portfolio</h2>
-                <p>Current workflow and next required action.</p>
-              </div>
+              <div><h2>Project Portfolio</h2><p>Current workflow and next required action.</p></div>
               <button class="link-btn" data-view-jump="projects">View all</button>
             </div>
             <div class="table-wrap">
@@ -79,24 +182,14 @@
               </table>
             </div>
           </section>
-
           <section class="card">
-            <div class="card-head">
-              <div>
-                <h2>Projects Requiring Attention</h2>
-                <p>Based on stage age and action ownership.</p>
-              </div>
-            </div>
+            <div class="card-head"><div><h2>Projects Requiring Attention</h2><p>Based on stage age and action ownership.</p></div></div>
             <div id="attention-list" class="attention-list"></div>
           </section>
         </div>
-
         <section class="card">
           <div class="card-head">
-            <div>
-              <h2>Recent Sales</h2>
-              <p>Latest settlements and distribution amounts.</p>
-            </div>
+            <div><h2>Recent Sales</h2><p>Latest settlements and distribution amounts.</p></div>
             <button class="link-btn" data-view-jump="sales">Open calculator →</button>
           </div>
           <div class="table-wrap">
@@ -108,6 +201,7 @@
         </section>
       </section>
 
+      <!-- PROJECTS -->
       <section id="view-projects" class="view">
         <div class="section-toolbar">
           <div class="searchbox">
@@ -116,7 +210,6 @@
           </div>
           <button class="btn primary" id="add-project-btn">+ Add Project</button>
         </div>
-
         <div class="projects-layout">
           <section class="card project-list-card">
             <div class="table-wrap">
@@ -126,7 +219,6 @@
               </table>
             </div>
           </section>
-
           <section class="card detail-card" id="project-detail">
             <div class="empty-state">
               <div class="empty-icon">◫</div>
@@ -137,17 +229,24 @@
         </div>
       </section>
 
+      <!-- SALES & DISTRIBUTION -->
       <section id="view-sales" class="view">
         <div class="sales-layout">
-          <section class="card calculator-card">
+          <section class="card calculator-card" id="sale-form-card">
             <div class="card-head">
               <div>
                 <h2>Sales & Distribution Calculator</h2>
                 <p>Calculate gross revenue, NDF and recipient distributions.</p>
               </div>
             </div>
-
             <form id="sale-form" class="form-grid">
+              <!-- Edit mode banner (hidden by default) -->
+              <div id="edit-sale-banner" class="edit-banner hidden">
+                <div class="edit-banner-label"><span>✏️</span> Editing Sale <span id="edit-sale-label">#—</span></div>
+                <button type="button" class="btn ghost" id="cancel-edit-btn" style="font-size:12px;padding:6px 12px;">✕ Cancel Edit</button>
+              </div>
+              <input type="hidden" name="editSaleId" id="edit-sale-id" value="" />
+
               <label>Sale Number<input name="saleNumber" placeholder="e.g. 17" required /></label>
               <label>Project<select name="projectId" id="sale-project" required></select></label>
               <label>Buyer<input name="buyer" placeholder="Buyer name" /></label>
@@ -156,7 +255,6 @@
               <label>Volume<input name="volume" type="number" min="0" step="0.01" required /></label>
               <label>Price / Credit<input name="price" type="number" min="0" step="0.01" required /></label>
               <label>Currency<select name="currency"><option>USD</option><option>KRW</option><option>EUR</option><option>SGD</option></select></label>
-
               <div class="form-divider"><span>Costs & reserve</span></div>
               <label>Registry Fee<input name="registryFee" type="number" min="0" step="0.01" value="0" /></label>
               <label>Transaction Fee<input name="transactionFee" type="number" min="0" step="0.01" value="0" /></label>
@@ -164,21 +262,18 @@
               <label>Insurance Cost<input name="insuranceCost" type="number" min="0" step="0.01" value="0" /></label>
               <label>Other Costs<input name="otherCosts" type="number" min="0" step="0.01" value="0" /></label>
               <label>Reserve Amount<input name="reserveAmount" type="number" min="0" step="0.01" value="0" /></label>
-
               <div class="form-divider"><span>Distribution rule</span></div>
               <label>Investor %<input name="investorPct" type="number" min="0" max="100" step="0.01" value="23.75" /></label>
               <label>Developer %<input name="developerPct" type="number" min="0" max="100" step="0.01" value="38.75" /></label>
               <label>Other / Government %<input name="otherPct" type="number" min="0" max="100" step="0.01" value="37.5" /></label>
               <label>Settlement Status<select name="status"><option>Pending</option><option>Scheduled</option><option>Settled</option></select></label>
-
               <div id="pct-warning" class="inline-warning hidden">Distribution percentages must total 100%.</div>
               <div class="form-actions">
                 <button type="button" class="btn ghost" id="preview-sale">Preview</button>
-                <button type="submit" class="btn primary">Save Sale</button>
+                <button type="submit" class="btn primary" id="sale-submit-btn">Save Sale</button>
               </div>
             </form>
           </section>
-
           <aside class="card result-card">
             <div class="eyebrow">Live Calculation</div>
             <h2>Distribution Preview</h2>
@@ -186,8 +281,11 @@
           </aside>
         </div>
 
+        <!-- SALES HISTORY -->
         <section class="card">
-          <div class="card-head"><div><h2>Sales History</h2><p>Saved transactions in this browser.</p></div></div>
+          <div class="card-head">
+            <div><h2>Sales History</h2><p>Saved transactions in this browser. Click <strong>Edit</strong> to modify a record.</p></div>
+          </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Sale</th><th>Date</th><th>Project</th><th>Buyer</th><th>Volume</th><th>Price</th><th>NDF</th><th>Status</th><th></th></tr></thead>
@@ -197,6 +295,7 @@
         </section>
       </section>
 
+      <!-- SETTINGS -->
       <section id="view-settings" class="view">
         <div class="settings-grid">
           <section class="card">
@@ -220,6 +319,7 @@
     </main>
   </div>
 
+  <!-- PROJECT MODAL -->
   <div class="modal" id="project-modal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
@@ -257,7 +357,6 @@
 
   <script>
 const STORAGE_KEY = 'carbonflow-v1-data';
-
 const workflow = [
   { name:'Project Development', owner:'Project Team', action:'Prepare project design and supporting documents.', next:'Pipeline Listing', days:30 },
   { name:'Pipeline Listing', owner:'Project Team / Registry', action:'Confirm pipeline listing and public information.', next:'Public Comment', days:20 },
@@ -277,10 +376,8 @@ const workflow = [
   { name:'Issuance Request', owner:'Project Team', action:'Submit issuance request and required fees/documents.', next:'VCU Issuance', days:10 },
   { name:'VCU Issuance', owner:'Registry', action:'Confirm issued volume and update inventory records.', next:'Complete', days:5 }
 ];
-
 const todayISO = () => new Date().toISOString().slice(0,10);
 const daysAgoISO = (n) => { const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().slice(0,10); };
-
 const demoData = {
   projects:[
     {id:'p1',projectId:'DEMO-4531',name:'Demo Methane Leak Reduction Project',country:'Uzbekistan',registry:'Verra VCS',methodology:'AM0023',proponent:'Demo Developer',vvb:'Demo VVB',registryStatus:'Registered',workflow:'Verification',stage:'Technical Review',stageStartDate:daysAgoISO(18),vintage:'2024',issued:3077506,sold:2200000,reserved:442021,retired:0,notes:'Demo data only — replace with your own project information.'},
@@ -294,6 +391,7 @@ const demoData = {
 
 let data = loadData();
 let selectedProjectId = null;
+let editingSaleId = null; // tracks which sale is being edited
 
 function loadData(){
   try{ const raw=localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : structuredClone(demoData); }
@@ -308,6 +406,7 @@ function fmtMoney(v,c='USD'){
   catch{return `${c} ${fmtNum(v,2)}`;}
 }
 function projectById(id){ return data.projects.find(p=>p.id===id); }
+function saleById(id){ return data.sales.find(s=>s.id===id); }
 function available(p){ return Math.max(0,num(p.issued)-num(p.sold)-num(p.reserved)-num(p.retired)); }
 function workflowIndex(stage){ return workflow.findIndex(w=>w.name===stage); }
 function stageInfo(stage){ return workflow.find(w=>w.name===stage) || workflow[0]; }
@@ -335,6 +434,60 @@ function setView(name){
   document.querySelector('#page-subtitle').textContent=titles[name][1];
 }
 
+// ─────────────────────────────────────────────
+//  EDIT SALE  — load a sale into the form
+// ─────────────────────────────────────────────
+function loadSaleForEdit(id){
+  const s = saleById(id);
+  if(!s) return;
+  const form = document.querySelector('#sale-form');
+  // Fill every field
+  const fields = ['saleNumber','projectId','buyer','saleDate','vintage','volume','price','currency',
+    'registryFee','transactionFee','brokerFee','insuranceCost','otherCosts','reserveAmount',
+    'investorPct','developerPct','otherPct','status'];
+  fields.forEach(f=>{ const el=form.elements[f]; if(el) el.value=s[f]??''; });
+  form.elements['editSaleId'].value = id;
+  editingSaleId = id;
+
+  // Show edit banner
+  document.querySelector('#edit-sale-banner').classList.remove('hidden');
+  document.querySelector('#edit-sale-label').textContent = `#${s.saleNumber}`;
+  document.querySelector('#sale-submit-btn').textContent = 'Update Sale';
+  document.querySelector('#sale-submit-btn').classList.add('warning');
+  document.querySelector('#sale-submit-btn').classList.remove('primary');
+
+  // Scroll to form
+  setView('sales');
+  document.querySelector('#sale-form-card').scrollIntoView({behavior:'smooth', block:'start'});
+  updateSalePreview();
+}
+
+function cancelSaleEdit(){
+  editingSaleId = null;
+  const form = document.querySelector('#sale-form');
+  form.reset();
+  form.elements['editSaleId'].value = '';
+  form.elements['saleDate'].value = todayISO();
+  form.elements['registryFee'].value = 0;
+  form.elements['transactionFee'].value = 0;
+  form.elements['brokerFee'].value = 0;
+  form.elements['insuranceCost'].value = 0;
+  form.elements['otherCosts'].value = 0;
+  form.elements['reserveAmount'].value = 0;
+  form.elements['investorPct'].value = 23.75;
+  form.elements['developerPct'].value = 38.75;
+  form.elements['otherPct'].value = 37.5;
+  document.querySelector('#edit-sale-banner').classList.add('hidden');
+  document.querySelector('#sale-submit-btn').textContent = 'Save Sale';
+  document.querySelector('#sale-submit-btn').classList.remove('warning');
+  document.querySelector('#sale-submit-btn').classList.add('primary');
+  updateSalePreview();
+  renderSales();
+}
+
+// ─────────────────────────────────────────────
+//  RENDER FUNCTIONS
+// ─────────────────────────────────────────────
 function renderDashboard(){
   const totalIssued=data.projects.reduce((a,p)=>a+num(p.issued),0);
   const totalSold=data.projects.reduce((a,p)=>a+num(p.sold),0);
@@ -343,21 +496,23 @@ function renderDashboard(){
   const gross=salesCalcs.reduce((a,s)=>a+s.gross,0), ndf=salesCalcs.reduce((a,s)=>a+s.ndf,0);
   const attention=data.projects.filter(p=>daysInStage(p)>expectedDays(p.stage)||['Findings / PRR'].includes(p.stage)).length;
   const kpis=[
-    ['Total Projects',data.projects.length,'Portfolio'],['Issued Credits',fmtNum(totalIssued),'Across all projects'],['Sold Credits',fmtNum(totalSold),'Recorded inventory'],['Remaining Inventory',fmtNum(totalAvailable),'Available after reserve/retirement'],['Gross Sales',fmtMoney(gross,'USD'),'USD-equivalent display'],['Projects Requiring Action',attention,'Rule-based alert']
+    ['Total Projects',data.projects.length,'Portfolio'],
+    ['Issued Credits',fmtNum(totalIssued),'Across all projects'],
+    ['Sold Credits',fmtNum(totalSold),'Recorded inventory'],
+    ['Remaining Inventory',fmtNum(totalAvailable),'Available after reserve/retirement'],
+    ['Gross Sales',fmtMoney(gross,'USD'),'USD-equivalent display'],
+    ['Projects Requiring Action',attention,'Rule-based alert']
   ];
   document.querySelector('#kpi-grid').innerHTML=kpis.map(k=>`<div class="kpi"><div class="label">${k[0]}</div><div class="value">${k[1]}</div><div class="sub">${k[2]}</div></div>`).join('');
-
   const projRows=data.projects.slice(0,6).map(p=>`<tr class="clickable" data-project-open="${p.id}"><td><div class="project-title">${esc(p.name)}</div><div class="project-meta">${esc(p.projectId)} · ${esc(p.country)}</div></td><td><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span></td><td>${esc(p.stage)}</td><td class="muted">${esc(stageInfo(p.stage).next)}</td></tr>`).join('');
   document.querySelector('#dashboard-projects').innerHTML=projRows||`<tr><td colspan="4" class="empty-row">No projects yet.</td></tr>`;
-
   const att=data.projects.map(p=>({p,days:daysInStage(p),limit:expectedDays(p.stage),info:stageInfo(p.stage)})).sort((a,b)=>(b.days-b.limit)-(a.days-a.limit));
   document.querySelector('#attention-list').innerHTML=att.length?att.slice(0,5).map(x=>{
     const delayed=x.days>x.limit; const needsAction=x.p.stage==='Findings / PRR';
     return `<div class="attention-item"><span class="attention-dot ${!delayed&&!needsAction?'ok':''}"></span><div><h4>${esc(x.p.projectId)} · ${esc(x.p.stage)}</h4><p>${needsAction?esc(x.info.action):delayed?'Internal expected processing time exceeded.':`Waiting on ${esc(x.info.owner)}.`}</p></div><div class="days">${x.days}d</div></div>`;
   }).join(''):`<div class="empty-state" style="padding:30px"><p>No projects yet.</p></div>`;
-
   const recent=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).slice(0,6);
-  document.querySelector('#dashboard-sales').innerHTML=recent.map(s=>{const c=saleCalc(s),p=projectById(s.projectId);return `<tr><td>#${esc(s.saleNumber)}</td><td>${esc(p?.name||'Unknown')}</td><td>${fmtNum(s.volume)}</td><td class="money">${fmtMoney(c.gross,s.currency)}</td><td class="money">${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td></tr>`}).join('')||`<tr><td colspan="6" class="empty-row">No sales yet.</td></tr>`;
+  document.querySelector('#dashboard-sales').innerHTML=recent.map(s=>{const c=saleCalc(s),p=projectById(s.projectId);return `<tr><td>#${esc(s.saleNumber)}</td><td>${esc(p?.name||'Unknown')}</td><td>${fmtNum(s.volume)}</td><td class="money">${fmtMoney(c.gross,s.currency)}</td><td class="money">${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td></tr>`;}).join('')||`<tr><td colspan="6" class="empty-row">No sales yet.</td></tr>`;
 }
 
 function renderProjects(){
@@ -396,12 +551,33 @@ function renderSales(){
   const current=sel.value;
   sel.innerHTML=`<option value="">Select project</option>`+data.projects.map(p=>`<option value="${p.id}">${esc(p.projectId)} — ${esc(p.name)}</option>`).join('');
   if(data.projects.some(p=>p.id===current)) sel.value=current;
-  const rows=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).map(s=>{const c=saleCalc(s),p=projectById(s.projectId);return `<tr><td>#${esc(s.saleNumber)}</td><td>${esc(s.saleDate)}</td><td>${esc(p?.projectId||'—')}</td><td>${esc(s.buyer||'—')}</td><td>${fmtNum(s.volume)}</td><td>${fmtMoney(s.price,s.currency)}</td><td>${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td><td><button class="delete-btn" data-delete-sale="${s.id}">Delete</button></td></tr>`}).join('');
+
+  const rows=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).map(s=>{
+    const c=saleCalc(s), p=projectById(s.projectId);
+    const isEditing = editingSaleId === s.id;
+    return `<tr${isEditing?' class="editing-row"':''}>
+      <td>#${esc(s.saleNumber)}</td>
+      <td>${esc(s.saleDate)}</td>
+      <td>${esc(p?.projectId||'—')}</td>
+      <td>${esc(s.buyer||'—')}</td>
+      <td>${fmtNum(s.volume)}</td>
+      <td>${fmtMoney(s.price,s.currency)}</td>
+      <td>${fmtMoney(c.ndf,s.currency)}</td>
+      <td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td>
+      <td>
+        <div class="action-btns">
+          <button class="edit-btn" data-edit-sale="${s.id}" title="Edit this sale">✏️ Edit</button>
+          <button class="delete-btn" data-delete-sale="${s.id}" title="Delete this sale">Delete</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
   document.querySelector('#sales-table').innerHTML=rows||`<tr><td colspan="9" class="empty-row">No sales saved yet.</td></tr>`;
   updateSalePreview();
 }
 
 function saleFormObject(){ const fd=new FormData(document.querySelector('#sale-form')); return Object.fromEntries(fd.entries()); }
+
 function updateSalePreview(){
   const s=saleFormObject(); const c=saleCalc(s); const pct=num(s.investorPct)+num(s.developerPct)+num(s.otherPct); const valid=Math.abs(pct-100)<.001;
   document.querySelector('#pct-warning').classList.toggle('hidden',valid);
@@ -419,8 +595,12 @@ function updateSalePreview(){
 function renderSettings(){
   document.querySelector('#workflow-settings').innerHTML=workflow.map(w=>`<label class="workflow-setting"><span>${esc(w.name)}</span><input type="number" min="0" step="1" data-stage-duration="${esc(w.name)}" value="${expectedDays(w.name)}" aria-label="Expected days for ${esc(w.name)}" /></label>`).join('');
 }
+
 function renderAll(){ renderDashboard(); renderProjects(); renderSales(); renderSettings(); }
 
+// ─────────────────────────────────────────────
+//  PROJECT MODAL
+// ─────────────────────────────────────────────
 function openProjectModal(project=null){
   const modal=document.querySelector('#project-modal'),form=document.querySelector('#project-form');
   form.reset();
@@ -428,10 +608,7 @@ function openProjectModal(project=null){
   document.querySelector('#project-modal-title').textContent=project?'Edit Project':'Add Project';
   deleteBtn.classList.toggle('hidden',!project);
   if(project){
-    Object.entries(project).forEach(([k,v])=>{
-      const el=form.elements[k==='id'?'editId':k];
-      if(el) el.value=v??'';
-    });
+    Object.entries(project).forEach(([k,v])=>{ const el=form.elements[k==='id'?'editId':k]; if(el) el.value=v??''; });
     form.elements.editId.value=project.id;
   } else {
     form.elements.stageStartDate.value=todayISO();
@@ -442,10 +619,16 @@ function openProjectModal(project=null){
 }
 function closeModal(){const m=document.querySelector('#project-modal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
 
+// ─────────────────────────────────────────────
+//  EXPORT
+// ─────────────────────────────────────────────
 function exportData(){
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`carbonflow-data-${todayISO()}.json`; a.click(); URL.revokeObjectURL(a.href);
 }
 
+// ─────────────────────────────────────────────
+//  EVENTS
+// ─────────────────────────────────────────────
 function setupEvents(){
   document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
   document.querySelectorAll('[data-view-jump]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.viewJump)));
@@ -457,52 +640,134 @@ function setupEvents(){
   document.querySelector('#preview-sale').addEventListener('click',updateSalePreview);
   document.querySelector('#sale-form').addEventListener('input',updateSalePreview);
 
+  // Cancel edit button
+  document.querySelector('#cancel-edit-btn').addEventListener('click', cancelSaleEdit);
+
+  // Project form submit (add / edit)
   document.querySelector('#project-form').addEventListener('submit',e=>{
     e.preventDefault(); const f=Object.fromEntries(new FormData(e.currentTarget).entries());
     const project={id:f.editId||crypto.randomUUID(),projectId:f.projectId,name:f.name,country:f.country,registry:f.registry,methodology:f.methodology,proponent:f.proponent,vvb:f.vvb,registryStatus:f.registryStatus,workflow:f.workflow,stage:f.stage,stageStartDate:f.stageStartDate||todayISO(),vintage:f.vintage,issued:num(f.issued),sold:num(f.sold),reserved:num(f.reserved),retired:num(f.retired),notes:f.notes};
     const idx=data.projects.findIndex(p=>p.id===project.id); if(idx>=0)data.projects[idx]=project;else data.projects.push(project);
     selectedProjectId=project.id; saveData(); closeModal(); setView('projects');
   });
+
+  // Delete project button
   document.querySelector('#delete-project-btn').addEventListener('click',()=>{
     const form=document.querySelector('#project-form');
     const id=form.elements.editId.value;
     const project=projectById(id);
     if(!project) return;
-
     const relatedSales=data.sales.filter(s=>s.projectId===id);
-    const salesMessage=relatedSales.length
-      ? `\n\nThis will also delete ${relatedSales.length} linked sale record${relatedSales.length===1?'':'s'}.`
-      : '';
-
+    const salesMessage=relatedSales.length?`\n\nThis will also delete ${relatedSales.length} linked sale record${relatedSales.length===1?'':'s'}.`:'';
     if(!confirm(`Delete project "${project.name}"?${salesMessage}\n\nThis action cannot be undone.`)) return;
-
     data.projects=data.projects.filter(p=>p.id!==id);
     data.sales=data.sales.filter(s=>s.projectId!==id);
     selectedProjectId=data.projects[0]?.id||null;
-
-    closeModal();
-    saveData();
-    setView('projects');
+    closeModal(); saveData(); setView('projects');
   });
 
+  // Sale form submit — handles BOTH new sale AND edit
   document.querySelector('#sale-form').addEventListener('submit',e=>{
-    e.preventDefault(); const s=saleFormObject(); const pct=num(s.investorPct)+num(s.developerPct)+num(s.otherPct);
+    e.preventDefault();
+    const s = saleFormObject();
+    const pct = num(s.investorPct)+num(s.developerPct)+num(s.otherPct);
     if(Math.abs(pct-100)>.001){ alert('Distribution percentages must total 100%.'); return; }
-    const p=projectById(s.projectId); if(!p){alert('Select a project.');return;}
-    if(num(s.volume)>available(p)){ if(!confirm(`Sale volume exceeds current available inventory (${fmtNum(available(p))}). Save anyway?`))return; }
-    const record={...s,id:crypto.randomUUID(),volume:num(s.volume),price:num(s.price),registryFee:num(s.registryFee),transactionFee:num(s.transactionFee),brokerFee:num(s.brokerFee),insuranceCost:num(s.insuranceCost),otherCosts:num(s.otherCosts),reserveAmount:num(s.reserveAmount),investorPct:num(s.investorPct),developerPct:num(s.developerPct),otherPct:num(s.otherPct)};
-    data.sales.push(record); p.sold=num(p.sold)+num(record.volume); saveData(); e.currentTarget.reset(); e.currentTarget.elements.saleDate.value=todayISO(); e.currentTarget.elements.registryFee.value=0;e.currentTarget.elements.transactionFee.value=0;e.currentTarget.elements.brokerFee.value=0;e.currentTarget.elements.insuranceCost.value=0;e.currentTarget.elements.otherCosts.value=0;e.currentTarget.elements.reserveAmount.value=0;e.currentTarget.elements.investorPct.value=23.75;e.currentTarget.elements.developerPct.value=38.75;e.currentTarget.elements.otherPct.value=37.5; renderSales();
+    const p = projectById(s.projectId);
+    if(!p){ alert('Select a project.'); return; }
+
+    const isEdit = !!s.editSaleId;
+
+    if(isEdit){
+      // ── UPDATE existing sale ──
+      const oldSale = saleById(s.editSaleId);
+      if(!oldSale){ alert('Sale not found.'); return; }
+
+      // Adjust project.sold: remove old volume, add new volume
+      const oldProject = projectById(oldSale.projectId);
+      if(oldProject) oldProject.sold = Math.max(0, num(oldProject.sold) - num(oldSale.volume));
+
+      const updatedSale = {
+        ...oldSale,
+        saleNumber: s.saleNumber, projectId: s.projectId, buyer: s.buyer,
+        saleDate: s.saleDate, vintage: s.vintage,
+        volume: num(s.volume), price: num(s.price), currency: s.currency,
+        registryFee: num(s.registryFee), transactionFee: num(s.transactionFee),
+        brokerFee: num(s.brokerFee), insuranceCost: num(s.insuranceCost),
+        otherCosts: num(s.otherCosts), reserveAmount: num(s.reserveAmount),
+        investorPct: num(s.investorPct), developerPct: num(s.developerPct),
+        otherPct: num(s.otherPct), status: s.status
+      };
+
+      // Check inventory with updated volume
+      const newP = projectById(s.projectId);
+      const projAvailableForEdit = num(newP.issued) - num(newP.sold) - num(newP.reserved) - num(newP.retired);
+      if(num(s.volume) > projAvailableForEdit){
+        if(!confirm(`Sale volume exceeds available inventory (${fmtNum(projAvailableForEdit)}). Save anyway?`)) {
+          // Restore old sold
+          if(oldProject) oldProject.sold = Math.max(0, num(oldProject.sold) + num(oldSale.volume));
+          return;
+        }
+      }
+
+      const idx = data.sales.findIndex(x=>x.id===s.editSaleId);
+      if(idx>=0) data.sales[idx] = updatedSale;
+
+      // Add new volume to project.sold
+      newP.sold = num(newP.sold) + num(updatedSale.volume);
+
+      editingSaleId = null;
+      cancelSaleEdit();
+      saveData();
+      alert(`Sale #${updatedSale.saleNumber} updated successfully.`);
+
+    } else {
+      // ── NEW sale ──
+      if(num(s.volume)>available(p)){ if(!confirm(`Sale volume exceeds current available inventory (${fmtNum(available(p))}). Save anyway?`))return; }
+      const record={...s,id:crypto.randomUUID(),volume:num(s.volume),price:num(s.price),registryFee:num(s.registryFee),transactionFee:num(s.transactionFee),brokerFee:num(s.brokerFee),insuranceCost:num(s.insuranceCost),otherCosts:num(s.otherCosts),reserveAmount:num(s.reserveAmount),investorPct:num(s.investorPct),developerPct:num(s.developerPct),otherPct:num(s.otherPct)};
+      data.sales.push(record);
+      p.sold = num(p.sold) + num(record.volume);
+      saveData();
+      // Reset form
+      e.currentTarget.reset();
+      e.currentTarget.elements.saleDate.value=todayISO();
+      e.currentTarget.elements.registryFee.value=0;e.currentTarget.elements.transactionFee.value=0;
+      e.currentTarget.elements.brokerFee.value=0;e.currentTarget.elements.insuranceCost.value=0;
+      e.currentTarget.elements.otherCosts.value=0;e.currentTarget.elements.reserveAmount.value=0;
+      e.currentTarget.elements.investorPct.value=23.75;e.currentTarget.elements.developerPct.value=38.75;
+      e.currentTarget.elements.otherPct.value=37.5;
+      renderSales();
+    }
   });
 
+  // Global click delegation
   document.addEventListener('click',e=>{
-    const open=e.target.closest('[data-project-open]'); if(open){ selectedProjectId=open.dataset.projectOpen; setView('projects'); renderProjects(); return; }
-    const edit=e.target.closest('[data-edit-project]'); if(edit){openProjectModal(projectById(edit.dataset.editProject));return;}
-    const del=e.target.closest('[data-delete-sale]'); if(del){ const s=data.sales.find(x=>x.id===del.dataset.deleteSale); if(s&&confirm(`Delete sale #${s.saleNumber}?`)){const p=projectById(s.projectId);if(p)p.sold=Math.max(0,num(p.sold)-num(s.volume));data.sales=data.sales.filter(x=>x.id!==s.id);saveData();}return;}
+    const open=e.target.closest('[data-project-open]');
+    if(open){ selectedProjectId=open.dataset.projectOpen; setView('projects'); renderProjects(); return; }
+
+    const edit=e.target.closest('[data-edit-project]');
+    if(edit){ openProjectModal(projectById(edit.dataset.editProject)); return; }
+
+    // ── Edit sale button ──
+    const editSale=e.target.closest('[data-edit-sale]');
+    if(editSale){ loadSaleForEdit(editSale.dataset.editSale); return; }
+
+    // ── Delete sale button ──
+    const del=e.target.closest('[data-delete-sale]');
+    if(del){
+      const s=data.sales.find(x=>x.id===del.dataset.deleteSale);
+      if(s&&confirm(`Delete sale #${s.saleNumber}?`)){
+        const p=projectById(s.projectId);
+        if(p) p.sold=Math.max(0,num(p.sold)-num(s.volume));
+        data.sales=data.sales.filter(x=>x.id!==s.id);
+        if(editingSaleId===s.id) cancelSaleEdit();
+        saveData();
+      }
+      return;
+    }
   });
 
   document.addEventListener('change',e=>{ if(e.target.matches('[data-stage-duration]')){data.stageDurations[e.target.dataset.stageDuration]=num(e.target.value);saveData();} });
-
-  document.querySelector('#reset-btn').addEventListener('click',()=>{if(confirm('Reset all local data to the original demo dataset?')){data=structuredClone(demoData);selectedProjectId=null;saveData();}});
+  document.querySelector('#reset-btn').addEventListener('click',()=>{if(confirm('Reset all local data to the original demo dataset?')){data=structuredClone(demoData);selectedProjectId=null;editingSaleId=null;cancelSaleEdit();saveData();}});
   document.querySelector('#import-btn').addEventListener('click',()=>document.querySelector('#import-file').click());
   document.querySelector('#import-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!parsed.projects||!parsed.sales)throw new Error('Invalid');data=parsed;data.stageDurations=data.stageDurations||structuredClone(demoData.stageDurations);saveData();alert('Import complete.');}catch{alert('Could not import this JSON file.');}e.target.value='';});
 }
@@ -513,7 +778,6 @@ function init(){
   setupEvents(); renderAll();
 }
 init();
-
   </script>
 </body>
 </html>
