@@ -1,605 +1,660 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="CarbonFlow — Carbon Project Operations & Revenue Management MVP" />
-<title>CarbonFlow · V1.3</title>
-<style>
-:root{
---bg:#f4f7f6;--surface:#fff;--surface-2:#f8faf9;--ink:#182321;--muted:#66736f;--line:#dce4e1;
---primary:#1f6b53;--primary-2:#e8f3ef;--danger:#a73f3f;--warn:#9a6c14;--shadow:0 8px 30px rgba(21,43,36,.07);
-}
-*{box-sizing:border-box}html{font-family:Arial,Helvetica,system-ui,sans-serif;background:var(--bg);color:var(--ink)}body{margin:0;min-height:100vh}button,input,select,textarea{font:inherit}.app-shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:#142a24;color:#eff7f4;padding:26px 20px;display:flex;flex-direction:column}.brand-wrap{display:flex;gap:12px;align-items:center;margin-bottom:34px}.brand-mark{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#d7eee5;color:#163c30;font-weight:800;font-size:14px}.brand{font-weight:700;letter-spacing:-.02em}.brand-sub{font-size:11px;opacity:.6;margin-top:3px}.nav{display:flex;flex-direction:column;gap:6px}.nav-item{border:0;background:transparent;color:#c9d7d2;text-align:left;padding:11px 12px;border-radius:8px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:14px}.nav-item:hover,.nav-item.active{background:rgba(255,255,255,.09);color:#fff}.sidebar-foot{margin-top:auto;font-size:12px;color:#9eb0aa}.sidebar-foot p{line-height:1.5}.status-dot-row{color:#d8e6e1;display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.dot.green{background:#62d69c}.main{padding:0 34px 50px;min-width:0}.topbar{height:104px;display:flex;align-items:center;justify-content:space-between;gap:20px}.topbar h1{margin:0;font-size:25px;letter-spacing:-.04em}.topbar p{margin:6px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;gap:10px}.btn{border-radius:8px;border:1px solid transparent;padding:10px 14px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s}.btn.primary{background:var(--primary);color:#fff}.btn.primary:hover{filter:brightness(.94)}.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}.btn.danger{background:#fff;border-color:#edcaca;color:var(--danger)}.btn.danger.push-left{margin-right:auto}.btn.danger:hover{background:#fff5f5;border-color:#dcaeae}.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:21px}.link-btn{border:0;background:transparent;color:var(--primary);font-weight:600;font-size:12px;cursor:pointer;padding:4px}.view{display:none}.view.active{display:block}.notice{background:#edf5f1;border:1px solid #d8e9e1;border-radius:10px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:18px;color:#395c50}.notice strong{color:#184f3e;margin-right:8px}.kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 2px 12px rgba(21,43,36,.025)}.kpi .label{font-size:11px;color:var(--muted);margin-bottom:9px}.kpi .value{font-size:21px;font-weight:700;letter-spacing:-.04em}.kpi .sub{font-size:10px;color:var(--muted);margin-top:7px}.grid-2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);gap:16px;margin-bottom:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 16px rgba(30,55,46,.03);overflow:hidden;margin-bottom:16px}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 20px 13px}.card-head h2{font-size:15px;margin:0;letter-spacing:-.02em}.card-head p{font-size:11px;color:var(--muted);margin:5px 0 0}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#74807c;font-weight:600;background:#fbfcfc;text-align:left;padding:11px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap}td{padding:12px 14px;border-bottom:1px solid #edf1ef;vertical-align:middle}tbody tr:last-child td{border-bottom:0}tbody tr.clickable{cursor:pointer}tbody tr.clickable:hover{background:#fafcfb}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:600;background:#eef2f1;color:#50605b;white-space:nowrap}.badge.green{background:#e8f4ef;color:#236b54}.badge.blue{background:#e9f0f8;color:#345f87}.badge.amber{background:#f8f1df;color:#8c6717}.badge.red{background:#f8e8e8;color:#9c4040}.muted{color:var(--muted)}.project-title{font-weight:600}.project-meta{font-size:10px;color:var(--muted);margin-top:3px}.attention-list{padding:0 18px 14px}.attention-item{display:grid;grid-template-columns:9px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-top:1px solid #edf1ef}.attention-item:first-child{border-top:1px solid var(--line)}.attention-dot{width:8px;height:8px;border-radius:50%;background:#d69d2b;margin-top:4px}.attention-dot.ok{background:#70a591}.attention-item h4{font-size:12px;margin:0 0 3px}.attention-item p{font-size:10px;line-height:1.5;color:var(--muted);margin:0}.attention-item .days{font-size:10px;color:var(--warn);font-weight:600}.section-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-bottom:14px}.searchbox{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 11px;min-width:min(520px,65vw)}.searchbox input{border:0;outline:0;width:100%;padding:10px 0;background:transparent;font-size:12px}.projects-layout{display:grid;grid-template-columns:minmax(520px,1fr) minmax(380px,.8fr);gap:16px;align-items:start}.project-list-card{margin:0}.detail-card{margin:0;min-height:540px;position:sticky;top:118px}.empty-state{display:grid;place-items:center;text-align:center;padding:105px 30px;color:var(--muted)}.empty-icon{width:48px;height:48px;border-radius:13px;background:var(--primary-2);color:var(--primary);display:grid;place-items:center;font-size:20px;margin-bottom:14px}.empty-state h3{margin:0 0 6px;color:var(--ink);font-size:14px}.empty-state p{font-size:11px;max-width:280px;line-height:1.6}.detail-inner{padding:20px}.detail-top{display:flex;justify-content:space-between;gap:12px}.detail-top h2{font-size:18px;margin:4px 0 5px}.eyebrow{text-transform:uppercase;font-size:9px;letter-spacing:.12em;font-weight:700;color:var(--muted)}.meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:16px 0}.meta-cell{background:#fff;padding:12px}.meta-cell .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.meta-cell .v{font-size:12px;font-weight:600;margin-top:5px}.action-card{border:1px solid #d8e8e1;background:#f6fbf9;border-radius:10px;padding:14px;margin:14px 0}.action-card h3{font-size:13px;margin:0 0 10px}.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action-item .k{font-size:9px;color:var(--muted);text-transform:uppercase}.action-item .v{font-size:11px;margin-top:4px;line-height:1.45}.workflow-title{font-size:12px;font-weight:700;margin:18px 0 10px}.workflow-list{display:flex;flex-direction:column}.workflow-step{display:grid;grid-template-columns:20px 1fr;gap:10px;position:relative;padding-bottom:12px}.workflow-step:not(:last-child)::before{content:"";position:absolute;left:7px;top:16px;bottom:0;width:1px;background:var(--line)}.step-dot{width:15px;height:15px;border-radius:50%;border:2px solid #c8d3cf;background:#fff;z-index:1}.workflow-step.done .step-dot{background:var(--primary);border-color:var(--primary)}.workflow-step.current .step-dot{border-color:var(--primary);box-shadow:0 0 0 4px #e8f4ef}.workflow-step .name{font-size:11px;font-weight:600}.workflow-step .desc{font-size:9px;color:var(--muted);margin-top:2px}.inventory-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.mini-stat{background:var(--surface-2);border:1px solid #e7ecea;border-radius:8px;padding:10px}.mini-stat .k{font-size:9px;color:var(--muted)}.mini-stat .v{font-size:13px;font-weight:700;margin-top:4px}.sales-layout{display:grid;grid-template-columns:minmax(620px,1.35fr) minmax(310px,.65fr);gap:16px;align-items:start}.calculator-card{margin:0}.result-card{position:sticky;top:118px;padding:20px;margin:0}.result-card h2{margin:5px 0 18px;font-size:16px}.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 20px 20px}.form-grid.two-col{grid-template-columns:repeat(2,1fr);padding:0}.form-grid label{display:flex;flex-direction:column;gap:6px;font-size:10px;color:var(--muted);font-weight:600}.form-grid input,.form-grid select,.form-grid textarea{border:1px solid var(--line);border-radius:7px;padding:9px 10px;color:var(--ink);outline:0;background:#fff;font-size:12px}.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:#7aa997;box-shadow:0 0 0 3px #edf6f2}.form-grid .full{grid-column:1/-1}.form-divider{grid-column:1/-1;border-top:1px solid var(--line);margin-top:4px;padding-top:10px}.form-divider span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}.form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;padding-top:4px}.inline-warning{grid-column:1/-1;background:#fff4e4;color:#8a641b;border:1px solid #f1d8aa;border-radius:7px;padding:9px 10px;font-size:11px}.hidden{display:none!important}.preview-stack{display:flex;flex-direction:column;gap:9px}.preview-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1ef;font-size:11px}.preview-line strong{font-size:12px}.preview-line.total{border-top:1px solid var(--line);border-bottom:0;margin-top:4px;padding-top:13px}.preview-line.total strong{font-size:15px}.preview-bar{height:8px;border-radius:99px;background:#e9eeec;overflow:hidden;display:flex;margin:12px 0 4px}.preview-bar span:nth-child(1){background:#2f755e}.preview-bar span:nth-child(2){background:#6ca08e}.preview-bar span:nth-child(3){background:#b4c8c1}.settings-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.workflow-setting{display:grid;grid-template-columns:1fr 90px;gap:10px;align-items:center;padding:11px 20px;border-top:1px solid #edf1ef}.workflow-setting span{font-size:11px}.workflow-setting input{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px;font-size:11px}.stack-actions{display:flex;gap:8px;padding:4px 20px 18px}.info-box{margin:0 20px 20px;background:var(--surface-2);border:1px solid var(--line);padding:13px;border-radius:8px}.info-box strong{font-size:11px}.info-box p{font-size:10px;line-height:1.6;color:var(--muted)}.modal{position:fixed;inset:0;display:none;z-index:50}.modal.open{display:grid;place-items:center}.modal-backdrop{position:absolute;inset:0;background:rgba(12,25,21,.45);backdrop-filter:blur(2px)}.modal-panel{position:relative;width:min(820px,calc(100vw - 32px));max-height:90vh;overflow:auto;background:#fff;border-radius:13px;box-shadow:var(--shadow);padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.modal-head h2{font-size:18px;margin:4px 0 0}.money{font-variant-numeric:tabular-nums}.right{text-align:right}.small{font-size:10px}.delete-btn{border:0;background:transparent;color:#a05252;cursor:pointer;font-size:11px}
+
+<!doctype html><html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CarbonFlow · V1.4</title>
+  <style>
+:root{--bg:#f4f7f6;--surface:#fff;--surface-2:#f8faf9;--ink:#182321;--muted:#66736f;--line:#dce4e1;--primary:#1f6b53;--primary-2:#e8f3ef;--danger:#a73f3f;--warn:#9a6c14;--shadow:0 8px 30px rgba(21,43,36,.07);}*{box-sizing:border-box}html{font-family:Arial,Helvetica,system-ui,sans-serif;background:var(--bg);color:var(--ink)}body{margin:0;min-height:100vh}button,input,select,textarea{font:inherit}
+.app-shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:#142a24;color:#eff7f4;padding:26px 20px;display:flex;flex-direction:column}
+.brand-wrap{display:flex;gap:12px;align-items:center;margin-bottom:34px}
+.brand-mark{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#d7eee5;color:#163c30;font-weight:800;font-size:14px}
+.brand{font-weight:700;letter-spacing:-.02em}.brand-sub{font-size:11px;opacity:.6;margin-top:3px}
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav-item{border:0;background:transparent;color:#c9d7d2;text-align:left;padding:11px 12px;border-radius:8px;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:14px}
+.nav-item:hover,.nav-item.active{background:rgba(255,255,255,.09);color:#fff}
+.sidebar-foot{margin-top:auto;font-size:12px;color:#9eb0aa}.sidebar-foot p{line-height:1.5}
+.status-dot-row{color:#d8e6e1;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.dot.green{background:#62d69c}
+.main{padding:0 34px 50px;min-width:0}
+.topbar{height:104px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.topbar h1{margin:0;font-size:25px;letter-spacing:-.04em}
+.topbar p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.top-actions{display:flex;gap:10px}
+.btn{border-radius:8px;border:1px solid transparent;padding:10px 14px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s}
+.btn.primary{background:var(--primary);color:#fff}.btn.primary:hover{filter:brightness(.94)}
+.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn.warning{background:#fff8e6;border-color:#f0d48a;color:#7a5a10}
+.btn.danger{background:#fff;border-color:#edcaca;color:var(--danger)}
+.btn.danger.push-left{margin-right:auto}.btn.danger:hover{background:#fff5f5;border-color:#dcaeae}
+.btn.sm{padding:6px 10px;font-size:11px}
+.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:21px}
+.link-btn{border:0;background:transparent;color:var(--primary);font-weight:600;font-size:12px;cursor:pointer;padding:4px}
+.view{display:none}.view.active{display:block}
+.notice{background:#edf5f1;border:1px solid #d8e9e1;border-radius:10px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:18px;color:#395c50}
+.notice strong{color:#184f3e;margin-right:8px}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 2px 12px rgba(21,43,36,.025)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:9px}.kpi .value{font-size:21px;font-weight:700;letter-spacing:-.04em}.kpi .sub{font-size:10px;color:var(--muted);margin-top:7px}
+.grid-2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);gap:16px;margin-bottom:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 16px rgba(30,55,46,.03);overflow:hidden;margin-bottom:16px}
+.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 20px 13px}
+.card-head h2{font-size:15px;margin:0;letter-spacing:-.02em}.card-head p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#74807c;font-weight:600;background:#fbfcfc;text-align:left;padding:11px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid #edf1ef;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}tbody tr.clickable{cursor:pointer}tbody tr.clickable:hover{background:#fafcfb}
+.badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:600;background:#eef2f1;color:#50605b;white-space:nowrap}
+.badge.green{background:#e8f4ef;color:#236b54}.badge.blue{background:#e9f0f8;color:#345f87}
+.badge.amber{background:#f8f1df;color:#8c6717}.badge.red{background:#f8e8e8;color:#9c4040}
+.badge.purple{background:#f0ecf8;color:#5c4494}.badge.teal{background:#e4f5f3;color:#1a6b65}
+.muted{color:var(--muted)}.project-title{font-weight:600}.project-meta{font-size:10px;color:var(--muted);margin-top:3px}
+.attention-list{padding:0 18px 14px}
+.attention-item{display:grid;grid-template-columns:9px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-top:1px solid #edf1ef}
+.attention-item:first-child{border-top:1px solid var(--line)}
+.attention-dot{width:8px;height:8px;border-radius:50%;background:#d69d2b;margin-top:4px}.attention-dot.ok{background:#70a591}
+.attention-item h4{font-size:12px;margin:0 0 3px}.attention-item p{font-size:10px;line-height:1.5;color:var(--muted);margin:0}
+.attention-item .days{font-size:10px;color:var(--warn);font-weight:600}
+.section-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-bottom:14px}
+.searchbox{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 11px;min-width:min(520px,65vw)}
+.searchbox input{border:0;outline:0;width:100%;padding:10px 0;background:transparent;font-size:12px}
+.projects-layout{display:grid;grid-template-columns:minmax(520px,1fr) minmax(380px,.8fr);gap:16px;align-items:start}
+.project-list-card{margin:0}.detail-card{margin:0;min-height:540px;position:sticky;top:118px}
+.empty-state{display:grid;place-items:center;text-align:center;padding:105px 30px;color:var(--muted)}
+.empty-icon{width:48px;height:48px;border-radius:13px;background:var(--primary-2);color:var(--primary);display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+.empty-state h3{margin:0 0 6px;color:var(--ink);font-size:14px}.empty-state p{font-size:11px;max-width:280px;line-height:1.6}
+.detail-inner{padding:20px}.detail-top{display:flex;justify-content:space-between;gap:12px}.detail-top h2{font-size:18px;margin:4px 0 5px}
+.eyebrow{text-transform:uppercase;font-size:9px;letter-spacing:.12em;font-weight:700;color:var(--muted)}
+.meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:16px 0}
+.meta-cell{background:#fff;padding:12px}.meta-cell .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.meta-cell .v{font-size:12px;font-weight:600;margin-top:5px}
+.action-card{border:1px solid #d8e8e1;background:#f6fbf9;border-radius:10px;padding:14px;margin:14px 0}
+.action-card h3{font-size:13px;margin:0 0 10px}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.action-item .k{font-size:9px;color:var(--muted);text-transform:uppercase}.action-item .v{font-size:11px;margin-top:4px;line-height:1.45}
+.workflow-title{font-size:12px;font-weight:700;margin:18px 0 10px}
+.workflow-list{display:flex;flex-direction:column}
+.workflow-step{display:grid;grid-template-columns:20px 1fr;gap:10px;position:relative;padding-bottom:12px}
+.workflow-step:not(:last-child)::before{content:"";position:absolute;left:7px;top:16px;bottom:0;width:1px;background:var(--line)}
+.step-dot{width:15px;height:15px;border-radius:50%;border:2px solid #c8d3cf;background:#fff;z-index:1}
+.workflow-step.done .step-dot{background:var(--primary);border-color:var(--primary)}
+.workflow-step.current .step-dot{border-color:var(--primary);box-shadow:0 0 0 4px #e8f4ef}
+.workflow-step .name{font-size:11px;font-weight:600}.workflow-step .desc{font-size:9px;color:var(--muted);margin-top:2px}
+.inventory-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.mini-stat{background:var(--surface-2);border:1px solid #e7ecea;border-radius:8px;padding:10px}
+.mini-stat .k{font-size:9px;color:var(--muted)}.mini-stat .v{font-size:13px;font-weight:700;margin-top:4px}
+/* Inventory type breakdown */
+.inv-type-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}
+.inv-type-table th{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:6px 10px;text-align:left;background:#f8faf9;border-bottom:1px solid var(--line)}
+.inv-type-table td{padding:7px 10px;border-bottom:1px solid #edf1ef}
+.inv-type-table tr:last-child td{border-bottom:0}
+.inv-type-bar{height:6px;border-radius:99px;display:inline-block;min-width:4px}
+/* Type badge colors */
+.type-naked{background:#e9f0f8;color:#345f87}
+.type-corsia1{background:#e8f4ef;color:#236b54}
+.type-corsia2{background:#d8f0e8;color:#1a6b4a}
+.type-btr{background:#f0ecf8;color:#5c4494}
+.type-ing{background:#fff4e4;color:#8a641b}
+/* Inventory type form rows */
+.inv-type-rows{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.inv-type-row{display:grid;grid-template-columns:1fr 140px 32px;gap:8px;align-items:center}
+.inv-type-row select,.inv-type-row input{border:1px solid var(--line);border-radius:7px;padding:7px 9px;font-size:12px;color:var(--ink);background:#fff}
+.inv-type-row .remove-type-btn{border:0;background:transparent;color:#a05252;cursor:pointer;font-size:16px;padding:0;line-height:1}
+.add-type-btn{border:1px dashed #b0c8bf;background:transparent;color:var(--primary);border-radius:7px;padding:7px 12px;font-size:11px;cursor:pointer;width:100%;margin-top:6px}
+.add-type-btn:hover{background:var(--primary-2)}
+.inv-type-summary{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+/* Sales layout */
+.sales-layout{display:grid;grid-template-columns:minmax(620px,1.35fr) minmax(310px,.65fr);gap:16px;align-items:start}
+.calculator-card{margin:0}
+.result-card{position:sticky;top:118px;padding:20px;margin:0}.result-card h2{margin:5px 0 18px;font-size:16px}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 20px 20px}
+.form-grid.two-col{grid-template-columns:repeat(2,1fr);padding:0}
+.form-grid label{display:flex;flex-direction:column;gap:6px;font-size:10px;color:var(--muted);font-weight:600}
+.form-grid input,.form-grid select,.form-grid textarea{border:1px solid var(--line);border-radius:7px;padding:9px 10px;color:var(--ink);outline:0;background:#fff;font-size:12px}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:#7aa997;box-shadow:0 0 0 3px #edf6f2}
+.form-grid .full{grid-column:1/-1}
+.form-divider{grid-column:1/-1;border-top:1px solid var(--line);margin-top:4px;padding-top:10px}
+.form-divider span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;padding-top:4px}
+.inline-warning{grid-column:1/-1;background:#fff4e4;color:#8a641b;border:1px solid #f1d8aa;border-radius:7px;padding:9px 10px;font-size:11px}
+.hidden{display:none!important}
+.preview-stack{display:flex;flex-direction:column;gap:9px}
+.preview-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1ef;font-size:11px}
+.preview-line strong{font-size:12px}
+.preview-line.total{border-top:1px solid var(--line);border-bottom:0;margin-top:4px;padding-top:13px}
+.preview-line.total strong{font-size:15px}
+.preview-bar{height:8px;border-radius:99px;background:#e9eeec;overflow:hidden;display:flex;margin:12px 0 4px}
+.preview-bar span:nth-child(1){background:#2f755e}.preview-bar span:nth-child(2){background:#6ca08e}.preview-bar span:nth-child(3){background:#b4c8c1}
+/* Edit sale row highlight */
+.editing-row{background:#fffbea!important}
+.edit-banner{grid-column:1/-1;background:#fff8dc;border:1px solid #f0d060;border-radius:7px;padding:9px 12px;font-size:11px;color:#7a5a10;display:flex;justify-content:space-between;align-items:center}
+.settings-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.workflow-setting{display:grid;grid-template-columns:1fr 90px;gap:10px;align-items:center;padding:11px 20px;border-top:1px solid #edf1ef}
+.workflow-setting span{font-size:11px}.workflow-setting input{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px;font-size:11px}
+.stack-actions{display:flex;gap:8px;padding:4px 20px 18px}
+.info-box{margin:0 20px 20px;background:var(--surface-2);border:1px solid var(--line);padding:13px;border-radius:8px}
+.info-box strong{font-size:11px}.info-box p{font-size:10px;line-height:1.6;color:var(--muted)}
+.modal{position:fixed;inset:0;display:none;z-index:50}.modal.open{display:grid;place-items:center}
+.modal-backdrop{position:absolute;inset:0;background:rgba(12,25,21,.45);backdrop-filter:blur(2px)}
+.modal-panel{position:relative;width:min(860px,calc(100vw - 32px));max-height:90vh;overflow:auto;background:#fff;border-radius:13px;box-shadow:var(--shadow);padding:20px}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.modal-head h2{font-size:18px;margin:4px 0 0}
+.money{font-variant-numeric:tabular-nums}.right{text-align:right}.small{font-size:10px}
 .edit-btn{border:0;background:transparent;color:var(--primary);cursor:pointer;font-size:11px;font-weight:600}
-.sale-actions{display:flex;align-items:center;gap:8px;white-space:nowrap}
-.editing-note{grid-column:1/-1;background:#edf5f1;color:#275c4b;border:1px solid #d3e6de;border-radius:7px;padding:9px 10px;font-size:11px}
+.delete-btn{border:0;background:transparent;color:#a05252;cursor:pointer;font-size:11px}
 .empty-row{text-align:center;color:var(--muted);padding:28px 14px}
 @media(max-width:1180px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.projects-layout,.sales-layout{grid-template-columns:1fr}.detail-card,.result-card{position:static}.form-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:820px){.app-shell{grid-template-columns:1fr}.sidebar{position:static;height:auto;padding:15px}.brand-wrap{margin-bottom:12px}.nav{flex-direction:row;overflow:auto}.nav-item{white-space:nowrap}.sidebar-foot{display:none}.main{padding:0 16px 40px}.topbar{height:auto;padding:20px 0;align-items:flex-start}.top-actions{flex-wrap:wrap;justify-content:flex-end}.grid-2,.settings-grid{grid-template-columns:1fr}.projects-layout{grid-template-columns:1fr}.searchbox{min-width:0;flex:1}.kpi-grid{grid-template-columns:repeat(2,1fr)}.form-grid,.form-grid.two-col{grid-template-columns:1fr}.inventory-row{grid-template-columns:repeat(2,1fr)}}
-
-</style>
+  </style>
 </head>
 <body>
 <div class="app-shell">
-<aside class="sidebar">
-<div class="brand-wrap">
-<div class="brand-mark">CF</div>
-<div>
-<div class="brand">CarbonFlow</div>
-<div class="brand-sub">Project & Revenue Ops</div>
-</div>
+  <aside class="sidebar">
+    <div class="brand-wrap">
+      <div class="brand-mark">CF</div>
+      <div><div class="brand">CarbonFlow</div><div class="brand-sub">Project & Revenue Ops</div></div>
+    </div>
+    <nav class="nav" aria-label="Primary navigation">
+      <button class="nav-item active" data-view="dashboard"><span>&#8962;</span> Dashboard</button>
+      <button class="nav-item" data-view="projects"><span>&#9647;</span> Projects</button>
+      <button class="nav-item" data-view="sales"><span>&#8599;</span> Sales &amp; Distribution</button>
+      <button class="nav-item" data-view="settings"><span>&#9881;</span> Settings</button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="status-dot-row"><span class="dot green"></span> Local MVP</div>
+      <p>Data is saved only in this browser.</p>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><h1 id="page-title">Dashboard</h1><p id="page-subtitle">Carbon project status, inventory and revenue at a glance.</p></div>
+      <div class="top-actions">
+        <button class="btn ghost" id="export-btn">Export Data</button>
+        <button class="btn primary" id="quick-add-project">+ Add Project</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="view active">
+      <div class="notice"><div><strong>V1.4 &middot; Inventory Types</strong><span>Available credits can now be tagged by type: Naked-VCU, CORSIA, BTR, ING.</span></div><button class="link-btn" data-view-jump="projects">Manage projects &rarr;</button></div>
+      <div class="kpi-grid" id="kpi-grid"></div>
+      <div class="grid-2">
+        <section class="card"><div class="card-head"><div><h2>Project Portfolio</h2><p>Current workflow and next required action.</p></div><button class="link-btn" data-view-jump="projects">View all</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Project</th><th>Status</th><th>Stage</th><th>Next step</th></tr></thead><tbody id="dashboard-projects"></tbody></table></div>
+        </section>
+        <section class="card"><div class="card-head"><div><h2>Projects Requiring Attention</h2><p>Based on stage age and action ownership.</p></div></div><div id="attention-list" class="attention-list"></div></section>
+      </div>
+      <section class="card"><div class="card-head"><div><h2>Recent Sales</h2><p>Latest settlements and distribution amounts.</p></div><button class="link-btn" data-view-jump="sales">Open calculator &rarr;</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Sale</th><th>Project</th><th>Volume</th><th>Gross Revenue</th><th>NDF</th><th>Status</th></tr></thead><tbody id="dashboard-sales"></tbody></table></div>
+      </section>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="view-projects" class="view">
+      <div class="section-toolbar">
+        <div class="searchbox"><span>&#8981;</span><input id="project-search" type="search" placeholder="Search by project ID, name, country or methodology" /></div>
+        <button class="btn primary" id="add-project-btn">+ Add Project</button>
+      </div>
+      <div class="projects-layout">
+        <section class="card project-list-card">
+          <div class="table-wrap"><table><thead><tr><th>ID</th><th>Project</th><th>Registry</th><th>Stage</th><th>Available</th><th>Types</th></tr></thead><tbody id="projects-table"></tbody></table></div>
+        </section>
+        <section class="card detail-card" id="project-detail">
+          <div class="empty-state"><div class="empty-icon">&#9647;</div><h3>Select a project</h3><p>Choose a project from the table to see its workflow, next step and inventory.</p></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- SALES -->
+    <section id="view-sales" class="view">
+      <div class="sales-layout">
+        <section class="card calculator-card">
+          <div class="card-head"><div><h2>Sales &amp; Distribution Calculator</h2><p>Calculate gross revenue, NDF and recipient distributions.</p></div></div>
+          <div id="edit-sale-banner" class="form-grid hidden"><div class="edit-banner"><span id="edit-banner-text">Editing Sale</span><button type="button" class="btn ghost sm" id="cancel-edit-btn">Cancel Edit</button></div></div>
+          <form id="sale-form" class="form-grid">
+            <input type="hidden" name="editSaleId" id="edit-sale-id" value="" />
+            <label>Sale Number<input name="saleNumber" placeholder="e.g. 17" required /></label>
+            <label>Project<select name="projectId" id="sale-project" required></select></label>
+            <label>Buyer<input name="buyer" placeholder="Buyer name" /></label>
+            <label>Sale Date<input name="saleDate" type="date" required /></label>
+            <label>Vintage<input name="vintage" placeholder="e.g. 2024" /></label>
+            <label>Volume<input name="volume" type="number" min="0" step="0.01" required /></label>
+            <label>Price / Credit<input name="price" type="number" min="0" step="0.01" required /></label>
+            <label>Currency<select name="currency"><option>USD</option><option>KRW</option><option>EUR</option><option>SGD</option></select></label>
+            <label>Credit Type<select name="creditType"><option value="">-- Any --</option><option>Naked-VCU</option><option>CORSIA Phase 1</option><option>CORSIA Phase 2</option><option>BTR</option><option>ING</option></select></label>
+            <div class="form-divider"><span>Costs &amp; reserve</span></div>
+            <label>Registry Fee<input name="registryFee" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Transaction Fee<input name="transactionFee" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Broker Fee<input name="brokerFee" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Insurance Cost<input name="insuranceCost" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Other Costs<input name="otherCosts" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Reserve Amount<input name="reserveAmount" type="number" min="0" step="0.01" value="0" /></label>
+            <div class="form-divider"><span>Distribution rule</span></div>
+            <label>Investor %<input name="investorPct" type="number" min="0" max="100" step="0.01" value="23.75" /></label>
+            <label>Developer %<input name="developerPct" type="number" min="0" max="100" step="0.01" value="38.75" /></label>
+            <label>Other / Government %<input name="otherPct" type="number" min="0" max="100" step="0.01" value="37.5" /></label>
+            <label>Settlement Status<select name="status"><option>Pending</option><option>Scheduled</option><option>Settled</option></select></label>
+            <div id="pct-warning" class="inline-warning hidden">Distribution percentages must total 100%.</div>
+            <div class="form-actions">
+              <button type="button" class="btn ghost" id="preview-sale">Preview</button>
+              <button type="submit" class="btn primary" id="save-sale-btn">Save Sale</button>
+            </div>
+          </form>
+        </section>
+        <aside class="card result-card">
+          <div class="eyebrow">Live Calculation</div>
+          <h2>Distribution Preview</h2>
+          <div id="sale-preview" class="preview-stack"></div>
+        </aside>
+      </div>
+      <section class="card">
+        <div class="card-head"><div><h2>Sales History</h2><p>Saved transactions in this browser.</p></div></div>
+        <div class="table-wrap"><table><thead><tr><th>Sale</th><th>Date</th><th>Project</th><th>Buyer</th><th>Type</th><th>Volume</th><th>Price</th><th>NDF</th><th>Status</th><th></th></tr></thead><tbody id="sales-table"></tbody></table></div>
+      </section>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-settings" class="view">
+      <div class="settings-grid">
+        <section class="card"><div class="card-head"><div><h2>Workflow Settings</h2><p>Expected duration is used for attention alerts.</p></div></div><div id="workflow-settings"></div></section>
+        <section class="card"><div class="card-head"><div><h2>Data Management</h2><p>This MVP stores data locally in your browser.</p></div></div>
+          <div class="stack-actions">
+            <button class="btn ghost" id="import-btn">Import JSON</button>
+            <input type="file" id="import-file" accept="application/json" hidden />
+            <button class="btn danger" id="reset-btn">Reset Demo Data</button>
+          </div>
+          <div class="info-box"><strong>For later versions</strong><p>We can replace browser storage with Supabase, then add Verra registry/API synchronization without redesigning the interface.</p></div>
+        </section>
+      </div>
+    </section>
+  </main>
 </div>
 
-<nav class="nav" aria-label="Primary navigation">
-<button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
-<button class="nav-item" data-view="projects"><span>◫</span> Projects</button>
-<button class="nav-item" data-view="sales"><span>↗</span> Sales & Distribution</button>
-<button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
-</nav>
-
-<div class="sidebar-foot">
-<div class="status-dot-row"><span class="dot green"></span> Local MVP</div>
-<p>Data is saved only in this browser.</p>
-</div>
-</aside>
-
-<main class="main">
-<header class="topbar">
-<div>
-<h1 id="page-title">Dashboard</h1>
-<p id="page-subtitle">Carbon project status, inventory and revenue at a glance.</p>
-</div>
-<div class="top-actions">
-<button class="btn ghost" id="export-btn">Export Data</button>
-<button class="btn primary" id="quick-add-project">+ Add Project</button>
-</div>
-</header>
-
-<section id="view-dashboard" class="view active">
-<div class="notice">
-<div>
-<strong>V1.3 · SALES EDIT</strong>
-<span>Registry data is manual for now. Live Verra integration can be added later.</span>
-</div>
-<button class="link-btn" data-view-jump="projects">Manage projects →</button>
-</div>
-
-<div class="kpi-grid" id="kpi-grid"></div>
-
-<div class="grid-2">
-<section class="card">
-<div class="card-head">
-<div>
-<h2>Project Portfolio</h2>
-<p>Current workflow and next required action.</p>
-</div>
-<button class="link-btn" data-view-jump="projects">View all</button>
-</div>
-<div class="table-wrap">
-<table>
-<thead><tr><th>Project</th><th>Status</th><th>Stage</th><th>Next step</th></tr></thead>
-<tbody id="dashboard-projects"></tbody>
-</table>
-</div>
-</section>
-
-<section class="card">
-<div class="card-head">
-<div>
-<h2>Projects Requiring Attention</h2>
-<p>Based on stage age and action ownership.</p>
-</div>
-</div>
-<div id="attention-list" class="attention-list"></div>
-</section>
-</div>
-
-<section class="card">
-<div class="card-head">
-<div>
-<h2>Recent Sales</h2>
-<p>Latest settlements and distribution amounts.</p>
-</div>
-<button class="link-btn" data-view-jump="sales">Open calculator →</button>
-</div>
-<div class="table-wrap">
-<table>
-<thead><tr><th>Sale</th><th>Project</th><th>Volume</th><th>Gross Revenue</th><th>NDF</th><th>Status</th></tr></thead>
-<tbody id="dashboard-sales"></tbody>
-</table>
-</div>
-</section>
-</section>
-
-<section id="view-projects" class="view">
-<div class="section-toolbar">
-<div class="searchbox">
-<span>⌕</span>
-<input id="project-search" type="search" placeholder="Search by project ID, name, country or methodology" />
-</div>
-<button class="btn primary" id="add-project-btn">+ Add Project</button>
-</div>
-
-<div class="projects-layout">
-<section class="card project-list-card">
-<div class="table-wrap">
-<table>
-<thead><tr><th>ID</th><th>Project</th><th>Registry</th><th>Stage</th><th>Inventory</th></tr></thead>
-<tbody id="projects-table"></tbody>
-</table>
-</div>
-</section>
-
-<section class="card detail-card" id="project-detail">
-<div class="empty-state">
-<div class="empty-icon">◫</div>
-<h3>Select a project</h3>
-<p>Choose a project from the table to see its workflow, next step and inventory.</p>
-</div>
-</section>
-</div>
-</section>
-
-<section id="view-sales" class="view">
-<div class="sales-layout">
-<section class="card calculator-card">
-<div class="card-head">
-<div>
-<h2>Sales & Distribution Calculator</h2>
-<p>Calculate gross revenue, NDF and recipient distributions.</p>
-</div>
-</div>
-
-<form id="sale-form" class="form-grid">
-<input type="hidden" name="editSaleId" value="" />
-<div id="sale-editing-note" class="editing-note hidden">You are editing an existing sale. Update the fields below and click <strong>Update Sale</strong>.</div>
-<label>Sale Number<input name="saleNumber" placeholder="e.g. 17" required /></label>
-<label>Project<select name="projectId" id="sale-project" required></select></label>
-<label>Buyer<input name="buyer" placeholder="Buyer name" /></label>
-<label>Sale Date<input name="saleDate" type="date" required /></label>
-<label>Vintage<input name="vintage" placeholder="e.g. 2024" /></label>
-<label>Volume<input name="volume" type="number" min="0" step="0.01" required /></label>
-<label>Price / Credit<input name="price" type="number" min="0" step="0.01" required /></label>
-<label>Currency<select name="currency"><option>USD</option><option>KRW</option><option>EUR</option><option>SGD</option></select></label>
-
-<div class="form-divider"><span>Costs & reserve</span></div>
-<label>Registry Fee<input name="registryFee" type="number" min="0" step="0.01" value="0" /></label>
-<label>Transaction Fee<input name="transactionFee" type="number" min="0" step="0.01" value="0" /></label>
-<label>Broker Fee<input name="brokerFee" type="number" min="0" step="0.01" value="0" /></label>
-<label>Insurance Cost<input name="insuranceCost" type="number" min="0" step="0.01" value="0" /></label>
-<label>Other Costs<input name="otherCosts" type="number" min="0" step="0.01" value="0" /></label>
-<label>Reserve Amount<input name="reserveAmount" type="number" min="0" step="0.01" value="0" /></label>
-
-<div class="form-divider"><span>Distribution rule</span></div>
-<label>Investor %<input name="investorPct" type="number" min="0" max="100" step="0.01" value="23.75" /></label>
-<label>Developer %<input name="developerPct" type="number" min="0" max="100" step="0.01" value="38.75" /></label>
-<label>Other / Government %<input name="otherPct" type="number" min="0" max="100" step="0.01" value="37.5" /></label>
-<label>Settlement Status<select name="status"><option>Pending</option><option>Scheduled</option><option>Settled</option></select></label>
-
-<div id="pct-warning" class="inline-warning hidden">Distribution percentages must total 100%.</div>
-<div class="form-actions">
-<button type="button" class="btn ghost hidden" id="cancel-sale-edit">Cancel Edit</button>
-<button type="button" class="btn ghost" id="preview-sale">Preview</button>
-<button type="submit" class="btn primary" id="save-sale-btn">Save Sale</button>
-</div>
-</form>
-</section>
-
-<aside class="card result-card">
-<div class="eyebrow">Live Calculation</div>
-<h2>Distribution Preview</h2>
-<div id="sale-preview" class="preview-stack"></div>
-</aside>
-</div>
-
-<section class="card">
-<div class="card-head"><div><h2>Sales History</h2><p>Saved transactions in this browser. Use Edit to correct a saved sale without re-entering everything.</p></div></div>
-<div class="table-wrap">
-<table>
-<thead><tr><th>Sale</th><th>Date</th><th>Project</th><th>Buyer</th><th>Volume</th><th>Price</th><th>NDF</th><th>Status</th><th></th></tr></thead>
-<tbody id="sales-table"></tbody>
-</table>
-</div>
-</section>
-</section>
-
-<section id="view-settings" class="view">
-<div class="settings-grid">
-<section class="card">
-<div class="card-head"><div><h2>Workflow Settings</h2><p>Expected duration is used for attention alerts.</p></div></div>
-<div id="workflow-settings"></div>
-</section>
-<section class="card">
-<div class="card-head"><div><h2>Data Management</h2><p>This MVP stores data locally in your browser.</p></div></div>
-<div class="stack-actions">
-<button class="btn ghost" id="import-btn">Import JSON</button>
-<input type="file" id="import-file" accept="application/json" hidden />
-<button class="btn danger" id="reset-btn">Reset Demo Data</button>
-</div>
-<div class="info-box">
-<strong>For later versions</strong>
-<p>We can replace browser storage with Supabase, then add Verra registry/API synchronization without redesigning the interface.</p>
-</div>
-</section>
-</div>
-</section>
-</main>
-</div>
-
+<!-- PROJECT MODAL -->
 <div class="modal" id="project-modal" aria-hidden="true">
-<div class="modal-backdrop" data-close-modal></div>
-<div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
-<div class="modal-head">
-<div><div class="eyebrow">Project</div><h2 id="project-modal-title">Add Project</h2></div>
-<button class="icon-btn" data-close-modal aria-label="Close">×</button>
-</div>
-<form id="project-form" class="form-grid two-col">
-<input type="hidden" name="editId" />
-<label>Project ID<input name="projectId" required placeholder="e.g. 4531" /></label>
-<label>Project Name<input name="name" required placeholder="Project name" /></label>
-<label>Country<input name="country" placeholder="Uzbekistan" /></label>
-<label>Registry<select name="registry"><option>Verra VCS</option><option>Gold Standard</option><option>ART TREES</option><option>Other</option></select></label>
-<label>Methodology<input name="methodology" placeholder="e.g. AM0023" /></label>
-<label>Project Proponent<input name="proponent" placeholder="Organization" /></label>
-<label>VVB<input name="vvb" placeholder="Verification body" /></label>
-<label>Registry Status<select name="registryStatus"><option>Pipeline</option><option>Under Validation</option><option>Registered</option><option>Rejected</option><option>Withdrawn</option></select></label>
-<label>Current Workflow<select name="workflow"><option>Project Development</option><option>Validation</option><option>Registration</option><option>Monitoring</option><option>Verification</option><option>Issuance</option></select></label>
-<label>Detailed Stage<select name="stage" id="stage-select"></select></label>
-<label>Stage Start Date<input name="stageStartDate" type="date" /></label>
-<label>Vintage<input name="vintage" placeholder="e.g. 2024" /></label>
-<label>Issued Credits<input name="issued" type="number" min="0" step="1" value="0" /></label>
-<label>Sold Credits<input name="sold" type="number" min="0" step="1" value="0" /></label>
-<label>Reserved Credits<input name="reserved" type="number" min="0" step="1" value="0" /></label>
-<label>Retired Credits<input name="retired" type="number" min="0" step="1" value="0" /></label>
-<label class="full">Notes<textarea name="notes" rows="3" placeholder="Internal notes"></textarea></label>
-<div class="form-actions full">
-<button type="button" class="btn danger push-left hidden" id="delete-project-btn">Delete Project</button>
-<button type="button" class="btn ghost" data-close-modal>Cancel</button>
-<button type="submit" class="btn primary">Save Project</button>
-</div>
-</form>
-</div>
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <div class="modal-head"><div><div class="eyebrow">Project</div><h2 id="project-modal-title">Add Project</h2></div><button class="icon-btn" data-close-modal aria-label="Close">&times;</button></div>
+    <form id="project-form" class="form-grid two-col">
+      <input type="hidden" name="editId" />
+      <label>Project ID<input name="projectId" required placeholder="e.g. 4531" /></label>
+      <label>Project Name<input name="name" required placeholder="Project name" /></label>
+      <label>Country<input name="country" placeholder="Uzbekistan" /></label>
+      <label>Registry<select name="registry"><option>Verra VCS</option><option>Gold Standard</option><option>ART TREES</option><option>Other</option></select></label>
+      <label>Methodology<input name="methodology" placeholder="e.g. AM0023" /></label>
+      <label>Project Proponent<input name="proponent" placeholder="Organization" /></label>
+      <label>VVB<input name="vvb" placeholder="Verification body" /></label>
+      <label>Registry Status<select name="registryStatus"><option>Pipeline</option><option>Under Validation</option><option>Registered</option><option>Rejected</option><option>Withdrawn</option></select></label>
+      <label>Current Workflow<select name="workflow"><option>Project Development</option><option>Validation</option><option>Registration</option><option>Monitoring</option><option>Verification</option><option>Issuance</option></select></label>
+      <label>Detailed Stage<select name="stage" id="stage-select"></select></label>
+      <label>Stage Start Date<input name="stageStartDate" type="date" /></label>
+      <label>Vintage<input name="vintage" placeholder="e.g. 2024" /></label>
+      <label>Issued Credits<input name="issued" type="number" min="0" step="1" value="0" /></label>
+      <label>Sold Credits<input name="sold" type="number" min="0" step="1" value="0" /></label>
+      <label>Reserved Credits<input name="reserved" type="number" min="0" step="1" value="0" /></label>
+      <label>Retired Credits<input name="retired" type="number" min="0" step="1" value="0" /></label>
+      <!-- Inventory Type Breakdown -->
+      <div class="full form-divider"><span>&#128200; Available Inventory by Type</span></div>
+      <div class="full">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:8px;">Break down the available credits by type. Total should match the available balance (Issued - Sold - Reserved - Retired).</div>
+        <div class="inv-type-rows" id="inv-type-rows"></div>
+        <button type="button" class="add-type-btn" id="add-inv-type-btn">+ Add inventory type row</button>
+        <div id="inv-type-mismatch" class="hidden" style="margin-top:8px;background:#fff4e4;border:1px solid #f1d8aa;border-radius:7px;padding:8px 10px;font-size:10px;color:#8a641b;"></div>
+      </div>
+      <label class="full">Notes<textarea name="notes" rows="3" placeholder="Internal notes"></textarea></label>
+      <div class="form-actions full">
+        <button type="button" class="btn danger push-left hidden" id="delete-project-btn">Delete Project</button>
+        <button type="button" class="btn ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn primary">Save Project</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
-const STORAGE_KEY = 'carbonflow-v1-data';
+const STORAGE_KEY='carbonflow-v1-data';
+const CREDIT_TYPES=['Naked-VCU','CORSIA Phase 1','CORSIA Phase 2','BTR','ING'];
+const TYPE_COLORS={'Naked-VCU':'type-naked','CORSIA Phase 1':'type-corsia1','CORSIA Phase 2':'type-corsia2','BTR':'type-purple','ING':'type-ing'};
+const TYPE_BAR_COLORS={'Naked-VCU':'#345f87','CORSIA Phase 1':'#236b54','CORSIA Phase 2':'#1a6b4a','BTR':'#5c4494','ING':'#8a641b'};
 
-const workflow = [
-{ name:'Project Development', owner:'Project Team', action:'Prepare project design and supporting documents.', next:'Pipeline Listing', days:30 },
-{ name:'Pipeline Listing', owner:'Project Team / Registry', action:'Confirm pipeline listing and public information.', next:'Public Comment', days:20 },
-{ name:'Public Comment', owner:'Registry / Stakeholders', action:'Monitor public comment period and address comments if needed.', next:'VVB Validation', days:30 },
-{ name:'VVB Validation', owner:'VVB', action:'Coordinate validation questions and corrective actions.', next:'Registration Request', days:45 },
-{ name:'Registration Request', owner:'Project Team / Registry', action:'Track registration review and respond to findings.', next:'Registered', days:30 },
-{ name:'Registered', owner:'Project Team', action:'Start or continue monitoring according to the registered monitoring plan.', next:'Monitoring', days:1 },
-{ name:'Monitoring', owner:'Project Team', action:'Collect monitoring data and maintain evidence.', next:'Monitoring Report Preparation', days:90 },
-{ name:'Monitoring Report Preparation', owner:'Project Team', action:'Finalize monitoring report and evidence package.', next:'VVB Verification', days:30 },
-{ name:'VVB Verification', owner:'VVB / Project Team', action:'Support verification and close VVB findings.', next:'Verification Request Submitted', days:45 },
-{ name:'Verification Request Submitted', owner:'Project Team / Registry', action:'Confirm submission completeness.', next:'Registry Review', days:7 },
-{ name:'Registry Review', owner:'Registry', action:'Wait for registry review; respond if clarification is requested.', next:'Technical Review', days:15 },
-{ name:'Technical Review', owner:'Registry', action:'No immediate action unless findings are raised.', next:'Verification Approval or Findings / PRR', days:20 },
-{ name:'Findings / PRR', owner:'Project Team / VVB', action:'Review findings, coordinate evidence and prepare response.', next:'Response to Findings', days:15 },
-{ name:'Response to Findings', owner:'Project Team / VVB', action:'Submit response and track registry acceptance.', next:'Verification Approval', days:15 },
-{ name:'Verification Approval', owner:'Registry / Project Team', action:'Confirm approval and prepare issuance request.', next:'Issuance Request', days:5 },
-{ name:'Issuance Request', owner:'Project Team', action:'Submit issuance request and required fees/documents.', next:'VCU Issuance', days:10 },
-{ name:'VCU Issuance', owner:'Registry', action:'Confirm issued volume and update inventory records.', next:'Complete', days:5 }
+const workflow=[
+  {name:'Project Development',owner:'Project Team',action:'Prepare project design and supporting documents.',next:'Pipeline Listing',days:30},
+  {name:'Pipeline Listing',owner:'Project Team / Registry',action:'Confirm pipeline listing and public information.',next:'Public Comment',days:20},
+  {name:'Public Comment',owner:'Registry / Stakeholders',action:'Monitor public comment period and address comments if needed.',next:'VVB Validation',days:30},
+  {name:'VVB Validation',owner:'VVB',action:'Coordinate validation questions and corrective actions.',next:'Registration Request',days:45},
+  {name:'Registration Request',owner:'Project Team / Registry',action:'Track registration review and respond to findings.',next:'Registered',days:30},
+  {name:'Registered',owner:'Project Team',action:'Start or continue monitoring according to the registered monitoring plan.',next:'Monitoring',days:1},
+  {name:'Monitoring',owner:'Project Team',action:'Collect monitoring data and maintain evidence.',next:'Monitoring Report Preparation',days:90},
+  {name:'Monitoring Report Preparation',owner:'Project Team',action:'Finalize monitoring report and evidence package.',next:'VVB Verification',days:30},
+  {name:'VVB Verification',owner:'VVB / Project Team',action:'Support verification and close VVB findings.',next:'Verification Request Submitted',days:45},
+  {name:'Verification Request Submitted',owner:'Project Team / Registry',action:'Confirm submission completeness.',next:'Registry Review',days:7},
+  {name:'Registry Review',owner:'Registry',action:'Wait for registry review; respond if clarification is requested.',next:'Technical Review',days:15},
+  {name:'Technical Review',owner:'Registry',action:'No immediate action unless findings are raised.',next:'Verification Approval or Findings / PRR',days:20},
+  {name:'Findings / PRR',owner:'Project Team / VVB',action:'Review findings, coordinate evidence and prepare response.',next:'Response to Findings',days:15},
+  {name:'Response to Findings',owner:'Project Team / VVB',action:'Submit response and track registry acceptance.',next:'Verification Approval',days:15},
+  {name:'Verification Approval',owner:'Registry / Project Team',action:'Confirm approval and prepare issuance request.',next:'Issuance Request',days:5},
+  {name:'Issuance Request',owner:'Project Team',action:'Submit issuance request and required fees/documents.',next:'VCU Issuance',days:10},
+  {name:'VCU Issuance',owner:'Registry',action:'Confirm issued volume and update inventory records.',next:'Complete',days:5}
 ];
 
-const todayISO = () => new Date().toISOString().slice(0,10);
-const daysAgoISO = (n) => { const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().slice(0,10); };
+const todayISO=()=>new Date().toISOString().slice(0,10);
+const daysAgoISO=(n)=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);};
 
-const demoData = {
-projects:[
-{id:'p1',projectId:'DEMO-4531',name:'Demo Methane Leak Reduction Project',country:'Uzbekistan',registry:'Verra VCS',methodology:'AM0023',proponent:'Demo Developer',vvb:'Demo VVB',registryStatus:'Registered',workflow:'Verification',stage:'Technical Review',stageStartDate:daysAgoISO(18),vintage:'2024',issued:3077506,sold:2200000,reserved:442021,retired:0,notes:'Demo data only — replace with your own project information.'},
-{id:'p2',projectId:'DEMO-1024',name:'Demo Renewable Energy Project',country:'Vietnam',registry:'Verra VCS',methodology:'AMS-I.D.',proponent:'Demo Energy Co.',vvb:'Demo VVB',registryStatus:'Registered',workflow:'Monitoring',stage:'Monitoring Report Preparation',stageStartDate:daysAgoISO(12),vintage:'2025',issued:850000,sold:250000,reserved:50000,retired:10000,notes:'Demo data only.'}
-],
-sales:[
-{id:'s1',saleNumber:'16',projectId:'p1',buyer:'Demo Buyer',saleDate:daysAgoISO(35),vintage:'2024',volume:250000,price:18.5,currency:'USD',registryFee:6000,transactionFee:4000,brokerFee:0,insuranceCost:0,otherCosts:0,reserveAmount:200000,investorPct:23.75,developerPct:38.75,otherPct:37.5,status:'Settled'}
-],
-stageDurations:Object.fromEntries(workflow.map(w=>[w.name,w.days]))
+const demoData={
+  projects:[
+    {id:'p1',projectId:'DEMO-4531',name:'Demo Methane Leak Reduction Project',country:'Uzbekistan',registry:'Verra VCS',methodology:'AM0023',proponent:'Demo Developer',vvb:'Demo VVB',registryStatus:'Registered',workflow:'Verification',stage:'Technical Review',stageStartDate:daysAgoISO(18),vintage:'2024',issued:3077506,sold:2200000,reserved:442021,retired:0,notes:'Demo data only.',
+      inventoryTypes:[{type:'Naked-VCU',volume:235485},{type:'CORSIA Phase 1',volume:200000}]},
+    {id:'p2',projectId:'DEMO-1024',name:'Demo Renewable Energy Project',country:'Vietnam',registry:'Verra VCS',methodology:'AMS-I.D.',proponent:'Demo Energy Co.',vvb:'Demo VVB',registryStatus:'Registered',workflow:'Monitoring',stage:'Monitoring Report Preparation',stageStartDate:daysAgoISO(12),vintage:'2025',issued:850000,sold:250000,reserved:50000,retired:10000,notes:'Demo data only.',
+      inventoryTypes:[{type:'Naked-VCU',volume:540000}]}
+  ],
+  sales:[
+    {id:'s1',saleNumber:'16',projectId:'p1',buyer:'Demo Buyer',saleDate:daysAgoISO(35),vintage:'2024',volume:250000,price:18.5,currency:'USD',creditType:'Naked-VCU',registryFee:6000,transactionFee:4000,brokerFee:0,insuranceCost:0,otherCosts:0,reserveAmount:200000,investorPct:23.75,developerPct:38.75,otherPct:37.5,status:'Settled'}
+  ],
+  stageDurations:Object.fromEntries(workflow.map(w=>[w.name,w.days]))
 };
 
-let data = loadData();
-let selectedProjectId = null;
+let data=loadData();
+let selectedProjectId=null;
+let editingSaleId=null;
 
-function loadData(){
-try{ const raw=localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : structuredClone(demoData); }
-catch{ return structuredClone(demoData); }
-}
-function saveData(){ localStorage.setItem(STORAGE_KEY,JSON.stringify(data)); renderAll(); }
-function esc(v=''){ return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
-function num(v){ return Number(v||0); }
-function fmtNum(v,dec=0){ return new Intl.NumberFormat('en-US',{maximumFractionDigits:dec,minimumFractionDigits:dec}).format(num(v)); }
-function fmtMoney(v,c='USD'){
-try{return new Intl.NumberFormat('en-US',{style:'currency',currency:c,maximumFractionDigits:2}).format(num(v));}
-catch{return `${c} ${fmtNum(v,2)}`;}
-}
-function projectById(id){ return data.projects.find(p=>p.id===id); }
-function available(p){ return Math.max(0,num(p.issued)-num(p.sold)-num(p.reserved)-num(p.retired)); }
-function workflowIndex(stage){ return workflow.findIndex(w=>w.name===stage); }
-function stageInfo(stage){ return workflow.find(w=>w.name===stage) || workflow[0]; }
-function daysInStage(project){ if(!project.stageStartDate)return 0; const ms=Date.now()-new Date(project.stageStartDate+'T00:00:00').getTime(); return Math.max(0,Math.floor(ms/86400000)); }
-function expectedDays(stage){ return num(data.stageDurations?.[stage] ?? stageInfo(stage).days); }
-function saleCalc(s){
-const gross=num(s.volume)*num(s.price);
-const costs=['registryFee','transactionFee','brokerFee','insuranceCost','otherCosts','reserveAmount'].reduce((a,k)=>a+num(s[k]),0);
-const ndf=Math.max(0,gross-costs);
-return {gross,costs,ndf,investor:ndf*num(s.investorPct)/100,developer:ndf*num(s.developerPct)/100,other:ndf*num(s.otherPct)/100};
-}
-function badgeClass(value){
-const s=String(value).toLowerCase();
-if(s.includes('settled')||s.includes('registered')||s.includes('issued')||s.includes('approved'))return 'green';
-if(s.includes('review')||s.includes('verification')||s.includes('monitor'))return 'blue';
-if(s.includes('pending')||s.includes('findings')||s.includes('prr')||s.includes('scheduled'))return 'amber';
-if(s.includes('rejected')||s.includes('withdrawn'))return 'red'; return '';
+function loadData(){try{const raw=localStorage.getItem(STORAGE_KEY);if(raw){const d=JSON.parse(raw);d.projects.forEach(p=>{if(!p.inventoryTypes)p.inventoryTypes=[];});return d;}return structuredClone(demoData);}catch{return structuredClone(demoData);}}
+function saveData(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));renderAll();}
+function esc(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function num(v){return Number(v||0);}
+function fmtNum(v,dec=0){return new Intl.NumberFormat('en-US',{maximumFractionDigits:dec,minimumFractionDigits:dec}).format(num(v));}
+function fmtMoney(v,c='USD'){try{return new Intl.NumberFormat('en-US',{style:'currency',currency:c,maximumFractionDigits:2}).format(num(v));}catch{return `${c} ${fmtNum(v,2)}`;} }
+function projectById(id){return data.projects.find(p=>p.id===id);}
+function available(p){return Math.max(0,num(p.issued)-num(p.sold)-num(p.reserved)-num(p.retired));}
+function workflowIndex(stage){return workflow.findIndex(w=>w.name===stage);}
+function stageInfo(stage){return workflow.find(w=>w.name===stage)||workflow[0];}
+function daysInStage(project){if(!project.stageStartDate)return 0;const ms=Date.now()-new Date(project.stageStartDate+'T00:00:00').getTime();return Math.max(0,Math.floor(ms/86400000));}
+function expectedDays(stage){return num(data.stageDurations?.[stage]??stageInfo(stage).days);}
+function saleCalc(s){const gross=num(s.volume)*num(s.price);const costs=['registryFee','transactionFee','brokerFee','insuranceCost','otherCosts','reserveAmount'].reduce((a,k)=>a+num(s[k]),0);const ndf=Math.max(0,gross-costs);return{gross,costs,ndf,investor:ndf*num(s.investorPct)/100,developer:ndf*num(s.developerPct)/100,other:ndf*num(s.otherPct)/100};}
+function badgeClass(value){const s=String(value).toLowerCase();if(s.includes('settled')||s.includes('registered')||s.includes('issued')||s.includes('approved'))return 'green';if(s.includes('review')||s.includes('verification')||s.includes('monitor'))return 'blue';if(s.includes('pending')||s.includes('findings')||s.includes('prr')||s.includes('scheduled'))return 'amber';if(s.includes('rejected')||s.includes('withdrawn'))return 'red';return '';}
+function typeBadgeClass(t){return TYPE_COLORS[t]||'';}
+
+function invTypeSummaryHtml(p,compact=false){
+  const types=p.inventoryTypes||[];
+  if(!types.length)return '<span class="muted" style="font-size:10px">—</span>';
+  if(compact){return types.slice(0,3).map(t=>`<span class="badge ${typeBadgeClass(t.type)}" style="font-size:9px;padding:2px 6px">${esc(t.type.replace('CORSIA ',''))}</span>`).join(' ')+(types.length>3?` <span class="badge" style="font-size:9px">+${types.length-3}</span>`:'');}
+  return types.map(t=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #edf1ef"><span class="badge ${typeBadgeClass(t.type)}">${esc(t.type)}</span><span style="font-size:12px;font-weight:600">${fmtNum(t.volume)}</span></div>`).join('');
 }
 
-function setView(name){
-document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));
-document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
-const titles={dashboard:['Dashboard','Carbon project status, inventory and revenue at a glance.'],projects:['Projects','Track registry status, workflow and next actions.'],sales:['Sales & Distribution','Calculate and store sales revenue distributions.'],settings:['Settings','Configure workflow expectations and manage local data.']};
-document.querySelector('#page-title').textContent=titles[name][0];
-document.querySelector('#page-subtitle').textContent=titles[name][1];
-}
+function setView(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.view===name));const titles={dashboard:['Dashboard','Carbon project status, inventory and revenue at a glance.'],projects:['Projects','Track registry status, workflow and next actions.'],sales:['Sales & Distribution','Calculate and store sales revenue distributions.'],settings:['Settings','Configure workflow expectations and manage local data.']};document.querySelector('#page-title').textContent=titles[name][0];document.querySelector('#page-subtitle').textContent=titles[name][1];}
 
 function renderDashboard(){
-const totalIssued=data.projects.reduce((a,p)=>a+num(p.issued),0);
-const totalSold=data.projects.reduce((a,p)=>a+num(p.sold),0);
-const totalAvailable=data.projects.reduce((a,p)=>a+available(p),0);
-const salesCalcs=data.sales.map(s=>saleCalc(s));
-const gross=salesCalcs.reduce((a,s)=>a+s.gross,0), ndf=salesCalcs.reduce((a,s)=>a+s.ndf,0);
-const attention=data.projects.filter(p=>daysInStage(p)>expectedDays(p.stage)||['Findings / PRR'].includes(p.stage)).length;
-const kpis=[
-['Total Projects',data.projects.length,'Portfolio'],['Issued Credits',fmtNum(totalIssued),'Across all projects'],['Sold Credits',fmtNum(totalSold),'Recorded inventory'],['Remaining Inventory',fmtNum(totalAvailable),'Available after reserve/retirement'],['Gross Sales',fmtMoney(gross,'USD'),'USD-equivalent display'],['Projects Requiring Action',attention,'Rule-based alert']
-];
-document.querySelector('#kpi-grid').innerHTML=kpis.map(k=>`<div class="kpi"><div class="label">${k[0]}</div><div class="value">${k[1]}</div><div class="sub">${k[2]}</div></div>`).join('');
-
-const projRows=data.projects.slice(0,6).map(p=>`<tr class="clickable" data-project-open="${p.id}"><td><div class="project-title">${esc(p.name)}</div><div class="project-meta">${esc(p.projectId)} · ${esc(p.country)}</div></td><td><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span></td><td>${esc(p.stage)}</td><td class="muted">${esc(stageInfo(p.stage).next)}</td></tr>`).join('');
-document.querySelector('#dashboard-projects').innerHTML=projRows||`<tr><td colspan="4" class="empty-row">No projects yet.</td></tr>`;
-
-const att=data.projects.map(p=>({p,days:daysInStage(p),limit:expectedDays(p.stage),info:stageInfo(p.stage)})).sort((a,b)=>(b.days-b.limit)-(a.days-a.limit));
-document.querySelector('#attention-list').innerHTML=att.length?att.slice(0,5).map(x=>{
-const delayed=x.days>x.limit; const needsAction=x.p.stage==='Findings / PRR';
-return `<div class="attention-item"><span class="attention-dot ${!delayed&&!needsAction?'ok':''}"></span><div><h4>${esc(x.p.projectId)} · ${esc(x.p.stage)}</h4><p>${needsAction?esc(x.info.action):delayed?'Internal expected processing time exceeded.':`Waiting on ${esc(x.info.owner)}.`}</p></div><div class="days">${x.days}d</div></div>`;
-}).join(''):`<div class="empty-state" style="padding:30px"><p>No projects yet.</p></div>`;
-
-const recent=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).slice(0,6);
-document.querySelector('#dashboard-sales').innerHTML=recent.map(s=>{const c=saleCalc(s),p=projectById(s.projectId);return `<tr><td>#${esc(s.saleNumber)}</td><td>${esc(p?.name||'Unknown')}</td><td>${fmtNum(s.volume)}</td><td class="money">${fmtMoney(c.gross,s.currency)}</td><td class="money">${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td></tr>`}).join('')||`<tr><td colspan="6" class="empty-row">No sales yet.</td></tr>`;
+  const totalIssued=data.projects.reduce((a,p)=>a+num(p.issued),0);
+  const totalSold=data.projects.reduce((a,p)=>a+num(p.sold),0);
+  const totalAvailable=data.projects.reduce((a,p)=>a+available(p),0);
+  const salesCalcs=data.sales.map(s=>saleCalc(s));
+  const gross=salesCalcs.reduce((a,s)=>a+s.gross,0),ndf=salesCalcs.reduce((a,s)=>a+s.ndf,0);
+  const attention=data.projects.filter(p=>daysInStage(p)>expectedDays(p.stage)||['Findings / PRR'].includes(p.stage)).length;
+  const kpis=[['Total Projects',data.projects.length,'Portfolio'],['Issued Credits',fmtNum(totalIssued),'Across all projects'],['Sold Credits',fmtNum(totalSold),'Recorded inventory'],['Remaining Inventory',fmtNum(totalAvailable),'Available after reserve/retirement'],['Gross Sales',fmtMoney(gross,'USD'),'USD-equivalent display'],['Projects Requiring Action',attention,'Rule-based alert']];
+  document.querySelector('#kpi-grid').innerHTML=kpis.map(k=>`<div class="kpi"><div class="label">${k[0]}</div><div class="value">${k[1]}</div><div class="sub">${k[2]}</div></div>`).join('');
+  const projRows=data.projects.slice(0,6).map(p=>`<tr class="clickable" data-project-open="${p.id}"><td><div class="project-title">${esc(p.name)}</div><div class="project-meta">${esc(p.projectId)} &middot; ${esc(p.country)}</div></td><td><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span></td><td>${esc(p.stage)}</td><td class="muted">${esc(stageInfo(p.stage).next)}</td></tr>`).join('');
+  document.querySelector('#dashboard-projects').innerHTML=projRows||`<tr><td colspan="4" class="empty-row">No projects yet.</td></tr>`;
+  const att=data.projects.map(p=>({p,days:daysInStage(p),limit:expectedDays(p.stage),info:stageInfo(p.stage)})).sort((a,b)=>(b.days-b.limit)-(a.days-a.limit));
+  document.querySelector('#attention-list').innerHTML=att.length?att.slice(0,5).map(x=>{const delayed=x.days>x.limit;const needsAction=x.p.stage==='Findings / PRR';return`<div class="attention-item"><span class="attention-dot ${!delayed&&!needsAction?'ok':''}"></span><div><h4>${esc(x.p.projectId)} &middot; ${esc(x.p.stage)}</h4><p>${needsAction?esc(x.info.action):delayed?'Internal expected processing time exceeded.':`Waiting on ${esc(x.info.owner)}.`}</p></div><div class="days">${x.days}d</div></div>`;}).join(''):`<div class="empty-state" style="padding:30px"><p>No projects yet.</p></div>`;
+  const recent=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).slice(0,6);
+  document.querySelector('#dashboard-sales').innerHTML=recent.map(s=>{const c=saleCalc(s),p=projectById(s.projectId);return`<tr><td>#${esc(s.saleNumber)}</td><td>${esc(p?.name||'Unknown')}</td><td>${fmtNum(s.volume)}</td><td class="money">${fmtMoney(c.gross,s.currency)}</td><td class="money">${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td></tr>`;}).join('')||`<tr><td colspan="6" class="empty-row">No sales yet.</td></tr>`;
 }
 
 function renderProjects(){
-const q=(document.querySelector('#project-search')?.value||'').toLowerCase();
-const rows=data.projects.filter(p=>[p.projectId,p.name,p.country,p.methodology].join(' ').toLowerCase().includes(q)).map(p=>`<tr class="clickable" data-project-open="${p.id}"><td>${esc(p.projectId)}</td><td><div class="project-title">${esc(p.name)}</div><div class="project-meta">${esc(p.country)} · ${esc(p.methodology||'—')}</div></td><td><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span></td><td>${esc(p.stage)}</td><td>${fmtNum(available(p))}</td></tr>`).join('');
-document.querySelector('#projects-table').innerHTML=rows||`<tr><td colspan="5" class="empty-row">No matching projects.</td></tr>`;
-if(selectedProjectId && projectById(selectedProjectId)) renderProjectDetail(projectById(selectedProjectId));
-else document.querySelector('#project-detail').innerHTML=`<div class="empty-state"><div class="empty-icon">◫</div><h3>${data.projects.length?'Select a project':'No projects yet'}</h3><p>${data.projects.length?'Choose a project from the table to see its workflow, next step and inventory.':'Add a project to start tracking its workflow and credit inventory.'}</p></div>`;
+  const q=(document.querySelector('#project-search')?.value||'').toLowerCase();
+  const rows=data.projects.filter(p=>[p.projectId,p.name,p.country,p.methodology].join(' ').toLowerCase().includes(q)).map(p=>`<tr class="clickable" data-project-open="${p.id}"><td>${esc(p.projectId)}</td><td><div class="project-title">${esc(p.name)}</div><div class="project-meta">${esc(p.country)} &middot; ${esc(p.methodology||'—')}</div></td><td><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span></td><td>${esc(p.stage)}</td><td>${fmtNum(available(p))}</td><td><div class="inv-type-summary">${invTypeSummaryHtml(p,true)}</div></td></tr>`).join('');
+  document.querySelector('#projects-table').innerHTML=rows||`<tr><td colspan="6" class="empty-row">No matching projects.</td></tr>`;
+  if(selectedProjectId&&projectById(selectedProjectId))renderProjectDetail(projectById(selectedProjectId));
+  else document.querySelector('#project-detail').innerHTML=`<div class="empty-state"><div class="empty-icon">&#9647;</div><h3>${data.projects.length?'Select a project':'No projects yet'}</h3><p>${data.projects.length?'Choose a project from the table to see its workflow, next step and inventory.':'Add a project to start tracking its workflow and credit inventory.'}</p></div>`;
 }
 
 function renderProjectDetail(p){
-const info=stageInfo(p.stage), idx=workflowIndex(p.stage), days=daysInStage(p), limit=expectedDays(p.stage), delayed=days>limit;
-const steps=workflow.map((w,i)=>`<div class="workflow-step ${i<idx?'done':i===idx?'current':''}"><span class="step-dot"></span><div><div class="name">${esc(w.name)}</div>${i===idx?`<div class="desc">Current · ${days} days in stage</div>`:''}</div></div>`).join('');
-const detail=document.querySelector('#project-detail');
-detail.innerHTML=`<div class="detail-inner">
-<div class="detail-top"><div><div class="eyebrow">${esc(p.registry)} · ${esc(p.projectId)}</div><h2>${esc(p.name)}</h2><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span> <span class="badge ${badgeClass(p.stage)}">${esc(p.stage)}</span></div><div><button class="btn ghost small" data-edit-project="${p.id}">Edit</button></div></div>
-<div class="meta-grid">
-<div class="meta-cell"><div class="k">Country</div><div class="v">${esc(p.country||'—')}</div></div><div class="meta-cell"><div class="k">Methodology</div><div class="v">${esc(p.methodology||'—')}</div></div>
-<div class="meta-cell"><div class="k">Current Workflow</div><div class="v">${esc(p.workflow||'—')}</div></div><div class="meta-cell"><div class="k">VVB</div><div class="v">${esc(p.vvb||'—')}</div></div>
-</div>
-<div class="action-card"><h3>What happens next?</h3><div class="action-grid">
-<div class="action-item"><div class="k">Current Stage</div><div class="v"><strong>${esc(p.stage)}</strong>${delayed?` <span class="badge amber">Attention</span>`:''}</div></div>
-<div class="action-item"><div class="k">Days in Stage</div><div class="v">${days} days · internal expectation ${limit} days</div></div>
-<div class="action-item"><div class="k">Responsible Party</div><div class="v">${esc(info.owner)}</div></div>
-<div class="action-item"><div class="k">Next Expected Step</div><div class="v">${esc(info.next)}</div></div>
-<div class="action-item" style="grid-column:1/-1"><div class="k">Project Manager Action</div><div class="v">${esc(info.action)}</div></div>
-</div></div>
-<div class="workflow-title">Credit Inventory</div>
-<div class="inventory-row"><div class="mini-stat"><div class="k">Issued</div><div class="v">${fmtNum(p.issued)}</div></div><div class="mini-stat"><div class="k">Sold</div><div class="v">${fmtNum(p.sold)}</div></div><div class="mini-stat"><div class="k">Reserved</div><div class="v">${fmtNum(p.reserved)}</div></div><div class="mini-stat"><div class="k">Available</div><div class="v">${fmtNum(available(p))}</div></div></div>
-<div class="workflow-title">Lifecycle</div><div class="workflow-list">${steps}</div>
-</div>`;
+  const info=stageInfo(p.stage),idx=workflowIndex(p.stage),days=daysInStage(p),limit=expectedDays(p.stage),delayed=days>limit;
+  const avail=available(p);
+  const types=p.inventoryTypes||[];
+  const typedTotal=types.reduce((a,t)=>a+num(t.volume),0);
+  const steps=workflow.map((w,i)=>`<div class="workflow-step ${i<idx?'done':i===idx?'current':''}"><span class="step-dot"></span><div><div class="name">${esc(w.name)}</div>${i===idx?`<div class="desc">Current &middot; ${days} days in stage</div>`:''}</div></div>`).join('');
+  // inventory type bar
+  let typeBarHtml='';
+  if(types.length&&typedTotal>0){
+    typeBarHtml=`<div style="height:8px;border-radius:99px;background:#e9eeec;overflow:hidden;display:flex;margin:8px 0 4px">`+types.map(t=>`<span style="width:${(num(t.volume)/typedTotal*100).toFixed(1)}%;background:${TYPE_BAR_COLORS[t.type]||'#aaa'};display:inline-block"></span>`).join('')+`</div>`;
+  }
+  const invTypeDetail=types.length?`${typeBarHtml}<table class="inv-type-table"><thead><tr><th>Type</th><th style="text-align:right">Volume</th><th style="text-align:right">%</th></tr></thead><tbody>`+types.map(t=>`<tr><td><span class="badge ${typeBadgeClass(t.type)}">${esc(t.type)}</span></td><td style="text-align:right;font-weight:600">${fmtNum(t.volume)}</td><td style="text-align:right;color:var(--muted)">${avail>0?(num(t.volume)/avail*100).toFixed(1):'0'}%</td></tr>`).join('')+`<tr style="font-weight:700"><td>Total tagged</td><td style="text-align:right">${fmtNum(typedTotal)}</td><td style="text-align:right;color:${Math.abs(typedTotal-avail)>1?'#a73f3f':'var(--primary)'}">${avail>0?(typedTotal/avail*100).toFixed(1):'0'}%</td></tr></tbody></table>`:`<div style="color:var(--muted);font-size:11px;margin-top:8px">No inventory types set. Edit the project to add type breakdown.</div>`;
+
+  const detail=document.querySelector('#project-detail');
+  detail.innerHTML=`<div class="detail-inner">
+    <div class="detail-top"><div><div class="eyebrow">${esc(p.registry)} &middot; ${esc(p.projectId)}</div><h2>${esc(p.name)}</h2><span class="badge ${badgeClass(p.registryStatus)}">${esc(p.registryStatus)}</span> <span class="badge ${badgeClass(p.stage)}">${esc(p.stage)}</span></div><div><button class="btn ghost" style="font-size:11px;padding:6px 10px" data-edit-project="${p.id}">Edit</button></div></div>
+    <div class="meta-grid"><div class="meta-cell"><div class="k">Country</div><div class="v">${esc(p.country||'—')}</div></div><div class="meta-cell"><div class="k">Methodology</div><div class="v">${esc(p.methodology||'—')}</div></div><div class="meta-cell"><div class="k">Current Workflow</div><div class="v">${esc(p.workflow||'—')}</div></div><div class="meta-cell"><div class="k">VVB</div><div class="v">${esc(p.vvb||'—')}</div></div></div>
+    <div class="action-card"><h3>What happens next?</h3><div class="action-grid"><div class="action-item"><div class="k">Current Stage</div><div class="v"><strong>${esc(p.stage)}</strong>${delayed?` <span class="badge amber">Attention</span>`:''}</div></div><div class="action-item"><div class="k">Days in Stage</div><div class="v">${days} days &middot; internal expectation ${limit} days</div></div><div class="action-item"><div class="k">Responsible Party</div><div class="v">${esc(info.owner)}</div></div><div class="action-item"><div class="k">Next Expected Step</div><div class="v">${esc(info.next)}</div></div><div class="action-item" style="grid-column:1/-1"><div class="k">Project Manager Action</div><div class="v">${esc(info.action)}</div></div></div></div>
+    <div class="workflow-title">Credit Inventory</div>
+    <div class="inventory-row"><div class="mini-stat"><div class="k">Issued</div><div class="v">${fmtNum(p.issued)}</div></div><div class="mini-stat"><div class="k">Sold</div><div class="v">${fmtNum(p.sold)}</div></div><div class="mini-stat"><div class="k">Reserved</div><div class="v">${fmtNum(p.reserved)}</div></div><div class="mini-stat" style="border-color:${Math.abs(typedTotal-avail)>1&&types.length?'#f0d060':'#e7ecea'}"><div class="k">Available</div><div class="v">${fmtNum(avail)}</div></div></div>
+    <div class="workflow-title" style="margin-top:14px">Available by Type</div>
+    ${invTypeDetail}
+    <div class="workflow-title">Lifecycle</div><div class="workflow-list">${steps}</div>
+  </div>`;
 }
 
 function renderSales(){
-const sel=document.querySelector('#sale-project');
-const current=sel.value;
-sel.innerHTML=`<option value="">Select project</option>`+data.projects.map(p=>`<option value="${p.id}">${esc(p.projectId)} — ${esc(p.name)}</option>`).join('');
-if(data.projects.some(p=>p.id===current)) sel.value=current;
-const rows=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).map(s=>{const c=saleCalc(s),p=projectById(s.projectId);return `<tr><td>#${esc(s.saleNumber)}</td><td>${esc(s.saleDate)}</td><td>${esc(p?.projectId||'—')}</td><td>${esc(s.buyer||'—')}</td><td>${fmtNum(s.volume)}</td><td>${fmtMoney(s.price,s.currency)}</td><td>${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td><td><div class="sale-actions"><button class="edit-btn" data-edit-sale="${s.id}">Edit</button><button class="delete-btn" data-delete-sale="${s.id}">Delete</button></div></td></tr>`}).join('');
-document.querySelector('#sales-table').innerHTML=rows||`<tr><td colspan="9" class="empty-row">No sales saved yet.</td></tr>`;
-updateSalePreview();
+  const sel=document.querySelector('#sale-project');
+  const current=sel.value;
+  sel.innerHTML=`<option value="">Select project</option>`+data.projects.map(p=>`<option value="${p.id}">${esc(p.projectId)} — ${esc(p.name)}</option>`).join('');
+  if(data.projects.some(p=>p.id===current))sel.value=current;
+  const rows=[...data.sales].sort((a,b)=>String(b.saleDate).localeCompare(String(a.saleDate))).map(s=>{
+    const c=saleCalc(s),p=projectById(s.projectId);
+    const isEditing=s.id===editingSaleId;
+    return`<tr class="${isEditing?'editing-row':''}"><td>#${esc(s.saleNumber)}</td><td>${esc(s.saleDate)}</td><td>${esc(p?.projectId||'—')}</td><td>${esc(s.buyer||'—')}</td><td>${s.creditType?`<span class="badge ${typeBadgeClass(s.creditType)}" style="font-size:9px">${esc(s.creditType)}</span>`:'<span class="muted">—</span>'}</td><td>${fmtNum(s.volume)}</td><td>${fmtMoney(s.price,s.currency)}</td><td>${fmtMoney(c.ndf,s.currency)}</td><td><span class="badge ${badgeClass(s.status)}">${esc(s.status)}</span></td><td style="display:flex;gap:6px"><button class="edit-btn" data-edit-sale="${s.id}">&#9998; Edit</button><button class="delete-btn" data-delete-sale="${s.id}">Delete</button></td></tr>`;
+  }).join('');
+  document.querySelector('#sales-table').innerHTML=rows||`<tr><td colspan="10" class="empty-row">No sales saved yet.</td></tr>`;
+  updateSalePreview();
 }
 
-function saleFormObject(){ const fd=new FormData(document.querySelector('#sale-form')); return Object.fromEntries(fd.entries()); }
+function saleFormObject(){const fd=new FormData(document.querySelector('#sale-form'));return Object.fromEntries(fd.entries());}
 function updateSalePreview(){
-const s=saleFormObject(); const c=saleCalc(s); const pct=num(s.investorPct)+num(s.developerPct)+num(s.otherPct); const valid=Math.abs(pct-100)<.001;
-document.querySelector('#pct-warning').classList.toggle('hidden',valid);
-const cur=s.currency||'USD';
-document.querySelector('#sale-preview').innerHTML=`
-<div class="preview-line"><span>Gross Revenue</span><strong>${fmtMoney(c.gross,cur)}</strong></div>
-<div class="preview-line"><span>Total Costs & Reserve</span><strong>− ${fmtMoney(c.costs,cur)}</strong></div>
-<div class="preview-line total"><span>Net Distribution Fund</span><strong>${fmtMoney(c.ndf,cur)}</strong></div>
-<div class="preview-bar"><span style="width:${num(s.investorPct)}%"></span><span style="width:${num(s.developerPct)}%"></span><span style="width:${num(s.otherPct)}%"></span></div>
-<div class="preview-line"><span>Investor · ${num(s.investorPct).toFixed(2)}%</span><strong>${fmtMoney(c.investor,cur)}</strong></div>
-<div class="preview-line"><span>Developer · ${num(s.developerPct).toFixed(2)}%</span><strong>${fmtMoney(c.developer,cur)}</strong></div>
-<div class="preview-line"><span>Other / Government · ${num(s.otherPct).toFixed(2)}%</span><strong>${fmtMoney(c.other,cur)}</strong></div>`;
+  const s=saleFormObject();const c=saleCalc(s);const pct=num(s.investorPct)+num(s.developerPct)+num(s.otherPct);const valid=Math.abs(pct-100)<.001;
+  document.querySelector('#pct-warning').classList.toggle('hidden',valid);
+  const cur=s.currency||'USD';
+  document.querySelector('#sale-preview').innerHTML=`
+    <div class="preview-line"><span>Gross Revenue</span><strong>${fmtMoney(c.gross,cur)}</strong></div>
+    <div class="preview-line"><span>Total Costs &amp; Reserve</span><strong>&minus; ${fmtMoney(c.costs,cur)}</strong></div>
+    <div class="preview-line total"><span>Net Distribution Fund</span><strong>${fmtMoney(c.ndf,cur)}</strong></div>
+    <div class="preview-bar"><span style="width:${num(s.investorPct)}%"></span><span style="width:${num(s.developerPct)}%"></span><span style="width:${num(s.otherPct)}%"></span></div>
+    <div class="preview-line"><span>Investor &middot; ${num(s.investorPct).toFixed(2)}%</span><strong>${fmtMoney(c.investor,cur)}</strong></div>
+    <div class="preview-line"><span>Developer &middot; ${num(s.developerPct).toFixed(2)}%</span><strong>${fmtMoney(c.developer,cur)}</strong></div>
+    <div class="preview-line"><span>Other / Government &middot; ${num(s.otherPct).toFixed(2)}%</span><strong>${fmtMoney(c.other,cur)}</strong></div>`;
 }
-
 
 function resetSaleForm(){
-const form=document.querySelector('#sale-form');
-form.reset();
-form.elements.editSaleId.value='';
-form.elements.saleDate.value=todayISO();
-form.elements.registryFee.value=0;
-form.elements.transactionFee.value=0;
-form.elements.brokerFee.value=0;
-form.elements.insuranceCost.value=0;
-form.elements.otherCosts.value=0;
-form.elements.reserveAmount.value=0;
-form.elements.investorPct.value=23.75;
-form.elements.developerPct.value=38.75;
-form.elements.otherPct.value=37.5;
-document.querySelector('#save-sale-btn').textContent='Save Sale';
-document.querySelector('#cancel-sale-edit').classList.add('hidden');
-document.querySelector('#sale-editing-note').classList.add('hidden');
-updateSalePreview();
+  const form=document.querySelector('#sale-form');
+  form.reset();
+  editingSaleId=null;
+  document.querySelector('#edit-sale-id').value='';
+  document.querySelector('#edit-sale-banner').classList.add('hidden');
+  document.querySelector('#save-sale-btn').textContent='Save Sale';
+  document.querySelector('#save-sale-btn').className='btn primary';
+  document.querySelector('#sale-form').elements.saleDate.value=todayISO();
+  document.querySelector('#sale-form').elements.registryFee.value=0;
+  document.querySelector('#sale-form').elements.transactionFee.value=0;
+  document.querySelector('#sale-form').elements.brokerFee.value=0;
+  document.querySelector('#sale-form').elements.insuranceCost.value=0;
+  document.querySelector('#sale-form').elements.otherCosts.value=0;
+  document.querySelector('#sale-form').elements.reserveAmount.value=0;
+  document.querySelector('#sale-form').elements.investorPct.value=23.75;
+  document.querySelector('#sale-form').elements.developerPct.value=38.75;
+  document.querySelector('#sale-form').elements.otherPct.value=37.5;
+  updateSalePreview();
+  renderSales();
 }
 
-function openSaleEditor(sale){
-if(!sale)return;
-setView('sales');
-const form=document.querySelector('#sale-form');
-const fields=['saleNumber','projectId','buyer','saleDate','vintage','volume','price','currency','registryFee','transactionFee','brokerFee','insuranceCost','otherCosts','reserveAmount','investorPct','developerPct','otherPct','status'];
-fields.forEach(name=>{
-if(form.elements[name]) form.elements[name].value=sale[name]??'';
-});
-form.elements.editSaleId.value=sale.id;
-document.querySelector('#save-sale-btn').textContent='Update Sale';
-document.querySelector('#cancel-sale-edit').classList.remove('hidden');
-document.querySelector('#sale-editing-note').classList.remove('hidden');
-updateSalePreview();
-document.querySelector('.calculator-card').scrollIntoView({behavior:'smooth',block:'start'});
+function loadSaleForEdit(id){
+  const s=data.sales.find(x=>x.id===id);
+  if(!s)return;
+  editingSaleId=id;
+  const form=document.querySelector('#sale-form');
+  const fields=['saleNumber','projectId','buyer','saleDate','vintage','volume','price','currency','creditType','registryFee','transactionFee','brokerFee','insuranceCost','otherCosts','reserveAmount','investorPct','developerPct','otherPct','status'];
+  fields.forEach(k=>{const el=form.elements[k];if(el)el.value=s[k]??'';});
+  document.querySelector('#edit-sale-id').value=id;
+  document.querySelector('#edit-banner-text').textContent=`Editing Sale #${s.saleNumber}`;
+  document.querySelector('#edit-sale-banner').classList.remove('hidden');
+  document.querySelector('#save-sale-btn').textContent='Update Sale';
+  document.querySelector('#save-sale-btn').className='btn warning';
+  updateSalePreview();
+  renderSales();
+  document.querySelector('#sale-form').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function renderSettings(){
-document.querySelector('#workflow-settings').innerHTML=workflow.map(w=>`<label class="workflow-setting"><span>${esc(w.name)}</span><input type="number" min="0" step="1" data-stage-duration="${esc(w.name)}" value="${expectedDays(w.name)}" aria-label="Expected days for ${esc(w.name)}" /></label>`).join('');
+  document.querySelector('#workflow-settings').innerHTML=workflow.map(w=>`<label class="workflow-setting"><span>${esc(w.name)}</span><input type="number" min="0" step="1" data-stage-duration="${esc(w.name)}" value="${expectedDays(w.name)}" aria-label="Expected days for ${esc(w.name)}" /></label>`).join('');
 }
-function renderAll(){ renderDashboard(); renderProjects(); renderSales(); renderSettings(); }
+function renderAll(){renderDashboard();renderProjects();renderSales();renderSettings();}
+
+// --- Inventory type form helpers ---
+function buildInvTypeRow(type='',volume=''){
+  const row=document.createElement('div');
+  row.className='inv-type-row';
+  row.innerHTML=`<select class="inv-type-select"><option value="">-- Select type --</option>${CREDIT_TYPES.map(t=>`<option value="${t}"${t===type?' selected':''}>${t}</option>`).join('')}</select><input type="number" class="inv-type-vol" min="0" step="1" placeholder="Volume" value="${esc(String(volume))}" /><button type="button" class="remove-type-btn" title="Remove">&times;</button>`;
+  row.querySelector('.remove-type-btn').addEventListener('click',()=>{row.remove();validateInvTypes();});
+  row.querySelectorAll('select,input').forEach(el=>el.addEventListener('input',validateInvTypes));
+  return row;
+}
+
+function validateInvTypes(){
+  const form=document.querySelector('#project-form');
+  const issued=num(form.elements.issued.value);
+  const sold=num(form.elements.sold.value);
+  const reserved=num(form.elements.reserved.value);
+  const retired=num(form.elements.retired.value);
+  const avail=Math.max(0,issued-sold-reserved-retired);
+  const rows=document.querySelectorAll('#inv-type-rows .inv-type-row');
+  let total=0;
+  rows.forEach(r=>{total+=num(r.querySelector('.inv-type-vol').value);});
+  const msg=document.querySelector('#inv-type-mismatch');
+  if(avail===0){msg.classList.add('hidden');return;}
+  if(total===0){msg.classList.add('hidden');return;}
+  if(Math.abs(total-avail)>0){
+    msg.textContent=`Type total (${fmtNum(total)}) does not match available balance (${fmtNum(avail)}). Difference: ${fmtNum(Math.abs(total-avail))}.`;
+    msg.classList.remove('hidden');
+  } else {
+    msg.textContent='Type total matches available balance ✓';
+    msg.style.background='#edf5f1';msg.style.borderColor='#b0d8c4';msg.style.color='#1a5c40';
+    msg.classList.remove('hidden');
+  }
+}
 
 function openProjectModal(project=null){
-const modal=document.querySelector('#project-modal'),form=document.querySelector('#project-form');
-form.reset();
-const deleteBtn=document.querySelector('#delete-project-btn');
-document.querySelector('#project-modal-title').textContent=project?'Edit Project':'Add Project';
-deleteBtn.classList.toggle('hidden',!project);
-if(project){
-Object.entries(project).forEach(([k,v])=>{
-const el=form.elements[k==='id'?'editId':k];
-if(el) el.value=v??'';
-});
-form.elements.editId.value=project.id;
-} else {
-form.elements.stageStartDate.value=todayISO();
-form.elements.editId.value='';
+  const modal=document.querySelector('#project-modal'),form=document.querySelector('#project-form');
+  form.reset();
+  const deleteBtn=document.querySelector('#delete-project-btn');
+  document.querySelector('#project-modal-title').textContent=project?'Edit Project':'Add Project';
+  deleteBtn.classList.toggle('hidden',!project);
+  // clear inv type rows
+  const rowsContainer=document.querySelector('#inv-type-rows');
+  rowsContainer.innerHTML='';
+  if(project){
+    Object.entries(project).forEach(([k,v])=>{const el=form.elements[k==='id'?'editId':k];if(el)el.value=v??'';});
+    form.elements.editId.value=project.id;
+    // populate inventory types
+    (project.inventoryTypes||[]).forEach(t=>{rowsContainer.appendChild(buildInvTypeRow(t.type,t.volume));});
+  } else {
+    form.elements.stageStartDate.value=todayISO();
+    form.elements.editId.value='';
+  }
+  document.querySelector('#inv-type-mismatch').classList.add('hidden');
+  modal.classList.add('open');modal.setAttribute('aria-hidden','false');
 }
-modal.classList.add('open');
-modal.setAttribute('aria-hidden','false');
-}
-function closeModal(){const m=document.querySelector('#project-modal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
 
-function exportData(){
-const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`carbonflow-data-${todayISO()}.json`; a.click(); URL.revokeObjectURL(a.href);
-}
+function closeModal(){const m=document.querySelector('#project-modal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
+function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`carbonflow-data-${todayISO()}.json`;a.click();URL.revokeObjectURL(a.href);}
 
 function setupEvents(){
-document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-document.querySelectorAll('[data-view-jump]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.viewJump)));
-document.querySelector('#quick-add-project').addEventListener('click',()=>openProjectModal());
-document.querySelector('#add-project-btn').addEventListener('click',()=>openProjectModal());
-document.querySelectorAll('[data-close-modal]').forEach(b=>b.addEventListener('click',closeModal));
-document.querySelector('#project-search').addEventListener('input',renderProjects);
-document.querySelector('#export-btn').addEventListener('click',exportData);
-document.querySelector('#preview-sale').addEventListener('click',updateSalePreview);
-document.querySelector('#sale-form').addEventListener('input',updateSalePreview);
-document.querySelector('#cancel-sale-edit').addEventListener('click',resetSaleForm);
+  document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+  document.querySelectorAll('[data-view-jump]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.viewJump)));
+  document.querySelector('#quick-add-project').addEventListener('click',()=>openProjectModal());
+  document.querySelector('#add-project-btn').addEventListener('click',()=>openProjectModal());
+  document.querySelectorAll('[data-close-modal]').forEach(b=>b.addEventListener('click',closeModal));
+  document.querySelector('#project-search').addEventListener('input',renderProjects);
+  document.querySelector('#export-btn').addEventListener('click',exportData);
+  document.querySelector('#preview-sale').addEventListener('click',updateSalePreview);
+  document.querySelector('#sale-form').addEventListener('input',updateSalePreview);
+  document.querySelector('#add-inv-type-btn').addEventListener('click',()=>{document.querySelector('#inv-type-rows').appendChild(buildInvTypeRow());validateInvTypes();});
+  document.querySelector('#cancel-edit-btn').addEventListener('click',resetSaleForm);
 
-document.querySelector('#project-form').addEventListener('submit',e=>{
-e.preventDefault(); const f=Object.fromEntries(new FormData(e.currentTarget).entries());
-const project={id:f.editId||crypto.randomUUID(),projectId:f.projectId,name:f.name,country:f.country,registry:f.registry,methodology:f.methodology,proponent:f.proponent,vvb:f.vvb,registryStatus:f.registryStatus,workflow:f.workflow,stage:f.stage,stageStartDate:f.stageStartDate||todayISO(),vintage:f.vintage,issued:num(f.issued),sold:num(f.sold),reserved:num(f.reserved),retired:num(f.retired),notes:f.notes};
-const idx=data.projects.findIndex(p=>p.id===project.id); if(idx>=0)data.projects[idx]=project;else data.projects.push(project);
-selectedProjectId=project.id; saveData(); closeModal(); setView('projects');
-});
-document.querySelector('#delete-project-btn').addEventListener('click',()=>{
-const form=document.querySelector('#project-form');
-const id=form.elements.editId.value;
-const project=projectById(id);
-if(!project) return;
+  document.querySelector('#project-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const f=Object.fromEntries(new FormData(e.currentTarget).entries());
+    // collect inventory types
+    const invTypes=[];
+    document.querySelectorAll('#inv-type-rows .inv-type-row').forEach(row=>{
+      const t=row.querySelector('.inv-type-select').value;
+      const v=num(row.querySelector('.inv-type-vol').value);
+      if(t&&v>0)invTypes.push({type:t,volume:v});
+    });
+    const project={id:f.editId||crypto.randomUUID(),projectId:f.projectId,name:f.name,country:f.country,registry:f.registry,methodology:f.methodology,proponent:f.proponent,vvb:f.vvb,registryStatus:f.registryStatus,workflow:f.workflow,stage:f.stage,stageStartDate:f.stageStartDate||todayISO(),vintage:f.vintage,issued:num(f.issued),sold:num(f.sold),reserved:num(f.reserved),retired:num(f.retired),notes:f.notes,inventoryTypes:invTypes};
+    const idx=data.projects.findIndex(p=>p.id===project.id);
+    if(idx>=0)data.projects[idx]=project;else data.projects.push(project);
+    selectedProjectId=project.id;saveData();closeModal();setView('projects');
+  });
 
-const relatedSales=data.sales.filter(s=>s.projectId===id);
-const salesMessage=relatedSales.length
-? `\n\nThis will also delete ${relatedSales.length} linked sale record${relatedSales.length===1?'':'s'}.`
-: '';
+  document.querySelector('#delete-project-btn').addEventListener('click',()=>{
+    const form=document.querySelector('#project-form');
+    const id=form.elements.editId.value;
+    const project=projectById(id);
+    if(!project)return;
+    const relatedSales=data.sales.filter(s=>s.projectId===id);
+    const salesMessage=relatedSales.length?`\n\nThis will also delete ${relatedSales.length} linked sale record${relatedSales.length===1?'':'s'}.`:'';
+    if(!confirm(`Delete project "${project.name}"?${salesMessage}\n\nThis action cannot be undone.`))return;
+    data.projects=data.projects.filter(p=>p.id!==id);
+    data.sales=data.sales.filter(s=>s.projectId!==id);
+    selectedProjectId=data.projects[0]?.id||null;
+    closeModal();saveData();setView('projects');
+  });
 
-if(!confirm(`Delete project "${project.name}"?${salesMessage}\n\nThis action cannot be undone.`)) return;
+  document.querySelector('#sale-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const s=saleFormObject();
+    const pct=num(s.investorPct)+num(s.developerPct)+num(s.otherPct);
+    if(Math.abs(pct-100)>.001){alert('Distribution percentages must total 100%.');return;}
+    const p=projectById(s.projectId);
+    if(!p){alert('Select a project.');return;}
+    const editId=document.querySelector('#edit-sale-id').value;
+    if(editId){
+      // UPDATE existing sale
+      const oldSale=data.sales.find(x=>x.id===editId);
+      if(!oldSale)return;
+      const oldVol=num(oldSale.volume);
+      const newVol=num(s.volume);
+      p.sold=Math.max(0,num(p.sold)-oldVol+newVol);
+      const idx=data.sales.findIndex(x=>x.id===editId);
+      data.sales[idx]={...oldSale,...s,id:editId,volume:newVol,price:num(s.price),registryFee:num(s.registryFee),transactionFee:num(s.transactionFee),brokerFee:num(s.brokerFee),insuranceCost:num(s.insuranceCost),otherCosts:num(s.otherCosts),reserveAmount:num(s.reserveAmount),investorPct:num(s.investorPct),developerPct:num(s.developerPct),otherPct:num(s.otherPct)};
+      saveData();resetSaleForm();
+    } else {
+      // NEW sale
+      if(num(s.volume)>available(p)){if(!confirm(`Sale volume exceeds current available inventory (${fmtNum(available(p))}). Save anyway?`))return;}
+      const record={...s,id:crypto.randomUUID(),volume:num(s.volume),price:num(s.price),registryFee:num(s.registryFee),transactionFee:num(s.transactionFee),brokerFee:num(s.brokerFee),insuranceCost:num(s.insuranceCost),otherCosts:num(s.otherCosts),reserveAmount:num(s.reserveAmount),investorPct:num(s.investorPct),developerPct:num(s.developerPct),otherPct:num(s.otherPct)};
+      data.sales.push(record);p.sold=num(p.sold)+num(record.volume);
+      saveData();resetSaleForm();
+    }
+  });
 
-data.projects=data.projects.filter(p=>p.id!==id);
-data.sales=data.sales.filter(s=>s.projectId!==id);
-selectedProjectId=data.projects[0]?.id||null;
+  document.addEventListener('click',e=>{
+    const open=e.target.closest('[data-project-open]');if(open){selectedProjectId=open.dataset.projectOpen;setView('projects');renderProjects();return;}
+    const edit=e.target.closest('[data-edit-project]');if(edit){openProjectModal(projectById(edit.dataset.editProject));return;}
+    const editSale=e.target.closest('[data-edit-sale]');if(editSale){loadSaleForEdit(editSale.dataset.editSale);return;}
+    const del=e.target.closest('[data-delete-sale]');if(del){const s=data.sales.find(x=>x.id===del.dataset.deleteSale);if(s&&confirm(`Delete sale #${s.saleNumber}?`)){const p=projectById(s.projectId);if(p)p.sold=Math.max(0,num(p.sold)-num(s.volume));data.sales=data.sales.filter(x=>x.id!==s.id);if(editingSaleId===s.id)resetSaleForm();else{saveData();}return;}}
+  });
 
-closeModal();
-saveData();
-setView('projects');
-});
-
-document.querySelector('#sale-form').addEventListener('submit',e=>{
-e.preventDefault();
-const s=saleFormObject();
-const pct=num(s.investorPct)+num(s.developerPct)+num(s.otherPct);
-if(Math.abs(pct-100)>.001){ alert('Distribution percentages must total 100%.'); return; }
-
-const p=projectById(s.projectId);
-if(!p){alert('Select a project.');return;}
-
-const existing=s.editSaleId ? data.sales.find(x=>x.id===s.editSaleId) : null;
-const effectiveAvailable=available(p)+(existing&&existing.projectId===p.id ? num(existing.volume) : 0);
-if(num(s.volume)>effectiveAvailable){
-if(!confirm(`Sale volume exceeds current available inventory (${fmtNum(effectiveAvailable)}). Save anyway?`))return;
-}
-
-const {editSaleId,...saleFields}=s;
-const record={
-...saleFields,
-id:existing?.id||crypto.randomUUID(),
-volume:num(s.volume),
-price:num(s.price),
-registryFee:num(s.registryFee),
-transactionFee:num(s.transactionFee),
-brokerFee:num(s.brokerFee),
-insuranceCost:num(s.insuranceCost),
-otherCosts:num(s.otherCosts),
-reserveAmount:num(s.reserveAmount),
-investorPct:num(s.investorPct),
-developerPct:num(s.developerPct),
-otherPct:num(s.otherPct)
-};
-
-if(existing){
-const oldProject=projectById(existing.projectId);
-if(oldProject) oldProject.sold=Math.max(0,num(oldProject.sold)-num(existing.volume));
-p.sold=num(p.sold)+num(record.volume);
-const idx=data.sales.findIndex(x=>x.id===existing.id);
-data.sales[idx]=record;
-}else{
-data.sales.push(record);
-p.sold=num(p.sold)+num(record.volume);
-}
-
-saveData();
-resetSaleForm();
-renderSales();
-});
-
-document.addEventListener('click',e=>{
-const open=e.target.closest('[data-project-open]'); if(open){ selectedProjectId=open.dataset.projectOpen; setView('projects'); renderProjects(); return; }
-const edit=e.target.closest('[data-edit-project]'); if(edit){openProjectModal(projectById(edit.dataset.editProject));return;}
-const editSale=e.target.closest('[data-edit-sale]'); if(editSale){openSaleEditor(data.sales.find(x=>x.id===editSale.dataset.editSale));return;}
-const del=e.target.closest('[data-delete-sale]'); if(del){ const s=data.sales.find(x=>x.id===del.dataset.deleteSale); if(s&&confirm(`Delete sale #${s.saleNumber}?`)){const p=projectById(s.projectId);if(p)p.sold=Math.max(0,num(p.sold)-num(s.volume));data.sales=data.sales.filter(x=>x.id!==s.id);if(document.querySelector('#sale-form').elements.editSaleId.value===s.id)resetSaleForm();saveData();}return;}
-});
-
-document.addEventListener('change',e=>{ if(e.target.matches('[data-stage-duration]')){data.stageDurations[e.target.dataset.stageDuration]=num(e.target.value);saveData();} });
-
-document.querySelector('#reset-btn').addEventListener('click',()=>{if(confirm('Reset all local data to the original demo dataset?')){data=structuredClone(demoData);selectedProjectId=null;saveData();}});
-document.querySelector('#import-btn').addEventListener('click',()=>document.querySelector('#import-file').click());
-document.querySelector('#import-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!parsed.projects||!parsed.sales)throw new Error('Invalid');data=parsed;data.stageDurations=data.stageDurations||structuredClone(demoData.stageDurations);saveData();alert('Import complete.');}catch{alert('Could not import this JSON file.');}e.target.value='';});
+  document.addEventListener('change',e=>{if(e.target.matches('[data-stage-duration]')){data.stageDurations[e.target.dataset.stageDuration]=num(e.target.value);saveData();}});
+  document.querySelector('#reset-btn').addEventListener('click',()=>{if(confirm('Reset all local data to the original demo dataset?')){data=structuredClone(demoData);selectedProjectId=null;saveData();}});
+  document.querySelector('#import-btn').addEventListener('click',()=>document.querySelector('#import-file').click());
+  document.querySelector('#import-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!parsed.projects||!parsed.sales)throw new Error('Invalid');data=parsed;data.stageDurations=data.stageDurations||structuredClone(demoData.stageDurations);data.projects.forEach(p=>{if(!p.inventoryTypes)p.inventoryTypes=[];});saveData();alert('Import complete.');}catch{alert('Could not import this JSON file.');}e.target.value='';});
+  // validate inv types when issued/sold/reserved/retired change
+  ['issued','sold','reserved','retired'].forEach(n=>{
+    document.querySelector(`#project-form [name="${n}"]`)?.addEventListener('input',validateInvTypes);
+  });
 }
 
 function init(){
-document.querySelector('#stage-select').innerHTML=workflow.map(w=>`<option>${esc(w.name)}</option>`).join('');
-setupEvents();
-resetSaleForm();
-renderAll();
+  document.querySelector('#stage-select').innerHTML=workflow.map(w=>`<option>${esc(w.name)}</option>`).join('');
+  document.querySelector('#sale-form').elements.saleDate.value=todayISO();
+  setupEvents();renderAll();
 }
 init();
-
 </script>
-</body>
-</html>
+</body></html>
